@@ -1,6 +1,5 @@
 package com.contoso.cont;
 
-import com.contoso.models.OrderDetails;
 import com.contoso.models.Orders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,7 @@ public class OrdersCont extends Global {
 
     @GetMapping("/orders")
     public String Orders(Model model) {
-        addAttributesOrders(model);
+        AddAttributesOrders(model);
         return "orders";
     }
 
@@ -25,7 +24,7 @@ public class OrdersCont extends Global {
         List<Orders> ordersList = repoOrders.findAll();
         for (Orders i : ordersList) {
             if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date)) {
-                addAttributesOrders(model);
+                AddAttributesOrders(model);
                 model.addAttribute("message", "Заказ для этого клиента с этой датой уже существует");
                 return "orders";
             }
@@ -42,7 +41,7 @@ public class OrdersCont extends Global {
         for (Orders i : ordersList) {
             if (i.getId().equals(id)) continue;
             if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date)) {
-                addAttributesOrders(model);
+                AddAttributesOrders(model);
                 model.addAttribute("message", "Заказ для этого клиента с этой датой уже существует");
                 return "orders";
             }

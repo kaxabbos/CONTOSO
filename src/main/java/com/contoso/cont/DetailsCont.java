@@ -10,7 +10,7 @@ public class DetailsCont extends Global {
 
     @GetMapping("/orders/{id}/details")
     public String Details(Model model, @PathVariable Long id) {
-        addAttributesDetails(model,id);
+        AddAttributesDetails(model,id);
         return "details";
     }
 }

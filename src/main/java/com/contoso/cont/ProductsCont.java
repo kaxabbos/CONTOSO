@@ -28,7 +28,7 @@ public class ProductsCont extends Global {
 
     @GetMapping("/products")
     public String Products(Model model) {
-        addAttributesProducts(model);
+        AddAttributesProducts(model);
         return "products";
     }
 
@@ -41,7 +41,7 @@ public class ProductsCont extends Global {
     @PostMapping("/product/csv")
     public String ProductCSV(Model model, @RequestParam MultipartFile file) {
         if (file.isEmpty()) {
-            addAttributesProducts(model);
+            AddAttributesProducts(model);
             model.addAttribute("message", "Пустой файл!!!");
             return "products";
         }
@@ -65,13 +65,13 @@ public class ProductsCont extends Global {
                 }
                 if (i.getQuantity() <= 0 || i.getUnitPrice() <= 0) flag = true;
                 if (flag) {
-                    addAttributesProducts(model);
+                    AddAttributesProducts(model);
                     model.addAttribute("message", "Некорректный файл!!!");
                     return "products";
                 }
             }
         } catch (Exception e) {
-            addAttributesProducts(model);
+            AddAttributesProducts(model);
             model.addAttribute("message", "Некорректный файл!!!");
             return "products";
         }
@@ -123,7 +123,7 @@ public class ProductsCont extends Global {
         List<OrderDetails> orderDetails = repoOrderDetails.findByIdProduct(id);
         if (orderDetails != null) {
             Products products = repoProducts.getById(id);
-            addAttributesProducts(model);
+            AddAttributesProducts(model);
             model.addAttribute("message", "Продукт " + products.getId() + " - " + products.getNameModel() + " используется");
             return "products";
         }

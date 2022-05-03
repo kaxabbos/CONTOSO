@@ -27,7 +27,7 @@ public class StatusesCont extends Global {
 
         System.out.println(orderDetailsList.size());
         if (orderDetailsList.size() == 0) {
-            addAttributesOrders(model);
+            AddAttributesOrders(model);
             model.addAttribute("message", "Не выбраны детали заказа: " + order.getId() + " - " + order.getIdFioClient());
             return "orders";
         }
@@ -35,12 +35,12 @@ public class StatusesCont extends Global {
         for (OrderDetails i : orderDetailsList) {
             product = repoProducts.getById(i.getIdProduct());
             if (i.getQuantity() > product.getQuantity()) {
-                addAttributesOrders(model);
+                AddAttributesOrders(model);
                 model.addAttribute("message", "Недостаточно продуктов для заказа: " + order.getId() + " - " + order.getIdFioClient());
                 return "orders";
             }
             if (i.getQuantity() == 0) {
-                addAttributesOrders(model);
+                AddAttributesOrders(model);
                 model.addAttribute("message", "Неккоректный выбор деталей заказа: " + order.getId() + " - " + order.getIdFioClient());
                 return "orders";
             }
@@ -49,7 +49,6 @@ public class StatusesCont extends Global {
         String dateNow = LocalDateTime.now().toString();
         for (OrderDetails i : orderDetailsList) {
             product = repoProducts.getById(i.getIdProduct());
-
             product.setQuantity(product.getQuantity() - i.getQuantity());
             StatProducts statProducts = new StatProducts(i.getQuantity(), dateNow.substring(0, 10), product.getId(), i.getId(), ProductStatus.Зарезервировано);
             repoProducts.save(product);
@@ -87,7 +86,7 @@ public class StatusesCont extends Global {
         Orders order = repoOrders.getById(id);
 
         if (order.getPaymentType() == PaymentType.Выберите) {
-            addAttributesPayments(model);
+            AddAttributesPayments(model);
             model.addAttribute("message", "Выберите тип оплаты");
             return "payments";
         }

@@ -15,21 +15,21 @@ public class OrderDetailsCont extends Global {
 
     @GetMapping("/orders/{idOrders}/orderDetails")
     public String Order(Model model, @PathVariable Long idOrders) {
-        addAttributesOrderDetails(model, idOrders);
+        AddAttributesOrderDetails(model, idOrders);
         return "orderDetails";
     }
 
     @PostMapping("/orders/{idOrders}/orderDetails/addProduct")
     public String OrderAddProduct(Model model, @PathVariable Long idOrders, @RequestParam Long idProduct) {
         if (repoProducts.getById(idProduct).getQuantity() == 0){
-            addAttributesOrderDetails(model, idOrders);
+            AddAttributesOrderDetails(model, idOrders);
             model.addAttribute("message", "Этого товара нету в наличии");
             return "orderDetails";
         }
 
         for (OrderDetails i : repoOrderDetails.findByIdOrders(idOrders)) {
             if (i.getIdProduct().equals(idProduct)) {
-                addAttributesOrderDetails(model, idOrders);
+                AddAttributesOrderDetails(model, idOrders);
                 model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же товара");
                 return "orderDetails";
             }
@@ -38,7 +38,7 @@ public class OrderDetailsCont extends Global {
         OrderDetails orderDetails = new OrderDetails(repoProducts.getById(idProduct), idOrders);
         repoOrderDetails.save(orderDetails);
 
-        fullPriceAndFullQuantity(idOrders);
+        FullPriceAndFullQuantity(idOrders);
 
         return "redirect:/orders/{idOrders}/orderDetails";
     }
@@ -51,7 +51,7 @@ public class OrderDetailsCont extends Global {
 
             for (OrderDetails i : orderDetailsList) {
                 if (i.getIdProduct().equals(idProduct)) {
-                    addAttributesOrderDetails(model, idOrders);
+                    AddAttributesOrderDetails(model, idOrders);
                     model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же товара");
                     return "orderDetails";
                 }
@@ -66,7 +66,7 @@ public class OrderDetailsCont extends Global {
 
         repoOrderDetails.save(orderDetails);
 
-        fullPriceAndFullQuantity(idOrders);
+        FullPriceAndFullQuantity(idOrders);
 
         return "redirect:/orders/{idOrders}/orderDetails";
     }

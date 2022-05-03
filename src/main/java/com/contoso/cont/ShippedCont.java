@@ -9,7 +9,7 @@ public class ShippedCont extends Global {
 
     @GetMapping("/shipped")
     public String Shipped(Model model) {
-        addAttributesShipped(model);
+        AddAttributesShipped(model);
         return "shipped";
     }
 

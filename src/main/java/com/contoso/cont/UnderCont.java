@@ -9,7 +9,7 @@ public class UnderCont extends Global{
 
     @GetMapping("/under")
     public String Under(Model model){
-        addAttributesUnder(model);
+        AddAttributesUnder(model);
         return "under";
     }
 

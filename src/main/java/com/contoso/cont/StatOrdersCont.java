@@ -12,13 +12,13 @@ public class StatOrdersCont extends Global {
 
     @GetMapping("/statOrders")
     public String statOrders(Model model) {
-        addAttributesStatOrders(model, OrderStatus.Все);
+        AddAttributesStatOrders(model, OrderStatus.Все);
         return "statOrders";
     }
 
     @PostMapping("/statOrders/status")
     public String statOrdersStatus(Model model, @RequestParam OrderStatus orderStatus) {
-        addAttributesStatOrders(model, orderStatus);
+        AddAttributesStatOrders(model, orderStatus);
         return "statOrders";
     }
 

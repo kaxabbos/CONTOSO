@@ -14,7 +14,7 @@ public class ProfilesCont extends Global {
 
     @GetMapping("/profiles")
     public String Profiles(Model model) {
-        addAttributesProfiles(model);
+        AddAttributesProfiles(model);
         return "profiles";
     }
 
@@ -29,7 +29,7 @@ public class ProfilesCont extends Global {
     @GetMapping("/profiles/{id}/delete")
     public String ProfilesDelete(Model model, @PathVariable long id) {
         if (getUserID() == id) {
-            addAttributesProfiles(model);
+            AddAttributesProfiles(model);
             model.addAttribute("message", "Вы не можете удалить свой профиль");
             return "profiles";
         }

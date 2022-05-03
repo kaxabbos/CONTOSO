@@ -18,14 +18,14 @@ public class IndexCont extends Global {
 
     @GetMapping("/index")
     public String Index1(Model model) {
-        addAttributesIndex(model);
+        AddAttributesIndex(model);
         model.addAttribute("role", getUserRole());
         return "index";
     }
 
     @GetMapping("/")
     public String Index2(Model model) {
-        addAttributesIndex(model);
+        AddAttributesIndex(model);
         return "index";
     }
 
@@ -36,7 +36,7 @@ public class IndexCont extends Global {
 
         if (!passwordOld.equals(user.getPassword())) {
             model.addAttribute("message", "Некорректный ввод текущего пароля");
-            addAttributesIndex(model);
+            AddAttributesIndex(model);
             return "index";
         }
 
@@ -44,7 +44,7 @@ public class IndexCont extends Global {
             if (!password.equals(passwordRepeat)) {
                 model.addAttribute("message",
                         "Новые пароли не совпадают");
-                addAttributesIndex(model);
+                AddAttributesIndex(model);
                 return "index";
             }
             user.setPassword(password);
@@ -72,7 +72,7 @@ public class IndexCont extends Global {
                 }
             } catch (IOException e) {
                 model.addAttribute("message", "Не удалось изменить аватарку");
-                addAttributesIndex(model);
+                AddAttributesIndex(model);
                 return "index";
             }
             Users user = getUser();

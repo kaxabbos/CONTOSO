@@ -14,7 +14,7 @@ public class PaymentsCont extends Global {
 
     @GetMapping("/payments")
     public String Payments(Model model) {
-        addAttributesPayments(model);
+        AddAttributesPayments(model);
         return "payments";
     }
 

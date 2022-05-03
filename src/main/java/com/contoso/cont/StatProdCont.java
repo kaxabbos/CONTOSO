@@ -12,13 +12,13 @@ public class StatProdCont extends Global {
 
     @GetMapping("/statProd")
     public String statProd(Model model) {
-        addAttributesStatProd(model, ProductStatus.Все, null);
+        AddAttributesStatProd(model, ProductStatus.Все, null);
         return "statProd";
     }
 
     @PostMapping("/statProd")
     public String statProdSearch(Model model, @RequestParam ProductStatus productStatus, @RequestParam String date) {
-        addAttributesStatProd(model, productStatus, date);
+        AddAttributesStatProd(model, productStatus, date);
         System.out.println(date);
         return "statProd";
     }

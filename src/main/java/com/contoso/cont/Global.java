@@ -31,76 +31,101 @@ public class Global {
     protected String uploadImg;
     protected String defAvatar = "def.jpeg";
 
-    protected void addAttributes(Model model) {
+    protected void OrderDelete(Long idOrder) {
+        repoOrders.deleteById(idOrder);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
+        for (OrderDetails i : orderDetailsList) {
+            repoOrderDetails.deleteById(i.getId());
+        }
+    }
+
+    protected void OrderAndStatProductDelete(Long idOrder) {
+        repoOrders.deleteById(idOrder);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
+        Products product;
+        for (OrderDetails i : orderDetailsList) {
+            repoOrderDetails.deleteById(i.getId());
+            repoStatProducts.delete(repoStatProducts.findByIdOrderDetails(i.getId()));
+            product = repoProducts.getById(i.getIdProduct());
+            product.setQuantity(product.getQuantity() + i.getQuantity());
+            List<OrderDetails> orderDetailsList1 = repoOrderDetails.findByIdProduct(product.getId());
+            for (OrderDetails j : orderDetailsList1) {
+                j.setQuantityMax(product.getQuantity());
+                repoOrderDetails.save(j);
+            }
+        }
+    }
+
+    protected void AddAttributes(Model model) {
         model.addAttribute("role", getUserRole());
         model.addAttribute("avatar", getAvatar());
         model.addAttribute("fio", getFIO());
     }
 
-    protected void addAttributesDetails(Model model, Long idOrders) {
-        addAttributes(model);
+    protected void AddAttributesDetails(Model model, Long idOrders) {
+        AddAttributes(model);
         model.addAttribute("details", repoOrderDetails.findByIdOrders(idOrders));
         model.addAttribute("order", repoOrders.getById(idOrders));
     }
 
-    protected void addAttributesIndex(Model model) {
-        addAttributes(model);
+    protected void AddAttributesIndex(Model model) {
+        AddAttributes(model);
         model.addAttribute("user", getUser());
     }
 
-    protected void addAttributesOrderDetails(Model model, Long idOrders) {
-        addAttributes(model);
+    protected void AddAttributesOrderDetails(Model model, Long idOrders) {
+        AddAttributes(model);
         model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrders));
         model.addAttribute("order", repoOrders.getById(idOrders));
         model.addAttribute("products", repoProducts.findAll());
     }
 
-    protected void addAttributesOrders(Model model) {
-        addAttributes(model);
+    protected void AddAttributesOrders(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Не_зарезервировано);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("orders", ordersList);
         model.addAttribute("clients", repoClients.findAll());
     }
 
-    protected void addAttributesPayments(Model model) {
-        addAttributes(model);
+    protected void AddAttributesPayments(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Зарезервировано);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("payments", ordersList);
         model.addAttribute("paymentTypes", PaymentType.values());
     }
 
-    protected void addAttributesShipment(Model model) {
-        addAttributes(model);
+    protected void AddAttributesShipment(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.В_отгрузке);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("shipments", ordersList);
     }
 
-    protected void addAttributesShipped(Model model) {
-        addAttributes(model);
+    protected void AddAttributesShipped(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Отгружено);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("shippeds", ordersList);
     }
 
-    protected void addAttributesOpen(Model model) {
-        addAttributes(model);
+    protected void AddAttributesOpen(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Открыто);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("opens", ordersList);
     }
 
-    protected void addAttributesUnder(Model model) {
-        addAttributes(model);
+    protected void AddAttributesUnder(Model model) {
+        AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Под_заказ);
-        priceQuantity(model, ordersList);
+        PriceQuantity(model, ordersList);
         model.addAttribute("unders", ordersList);
     }
 
-    protected void addAttributesStatProd(Model model, ProductStatus productStatus, String date) {
-        addAttributes(model);
+    protected void AddAttributesStatProd(Model model, ProductStatus productStatus, String date) {
+        AddAttributes(model);
 
         List<StatProducts> statProducts;
 
@@ -113,11 +138,9 @@ public class Global {
         } else {
             statProducts = repoStatProducts.findByProductStatusAndDate(productStatus, date);
         }
-
         Collections.reverse(statProducts);
 
         int max = 0;
-
         for (StatProducts i : statProducts) {
             if (i.getProductStatus() == ProductStatus.Произведено) max += i.getQuantity();
             if (i.getProductStatus() == ProductStatus.Отгружено || i.getProductStatus() == ProductStatus.Зарезервировано)
@@ -129,8 +152,8 @@ public class Global {
         model.addAttribute("ProductStatus", ProductStatus.values());
     }
 
-    protected void addAttributesStatOrders(Model model, OrderStatus orderStatus) {
-        addAttributes(model);
+    protected void AddAttributesStatOrders(Model model, OrderStatus orderStatus) {
+        AddAttributes(model);
 
         List<Orders> ordersList;
 
@@ -145,33 +168,33 @@ public class Global {
         model.addAttribute("productStats", ProductStatus.values());
     }
 
-    protected void addAttributesProducts(Model model) {
-        addAttributes(model);
+    protected void AddAttributesProducts(Model model) {
+        AddAttributes(model);
         List<Products> products = repoProducts.findAll();
         Collections.reverse(products);
         model.addAttribute("products", products);
         model.addAttribute("productNameModel", ProductNameModel.values());
     }
 
-    protected void addAttributesClients(Model model) {
-        addAttributes(model);
+    protected void AddAttributesClients(Model model) {
+        AddAttributes(model);
         List<Clients> clients = repoClients.findAll();
         Collections.reverse(clients);
         model.addAttribute("clients", clients);
     }
 
-    protected void addAttributesProfiles(Model model) {
-        addAttributes(model);
+    protected void AddAttributesProfiles(Model model) {
+        AddAttributes(model);
         model.addAttribute("roles", Roles.values());
         model.addAttribute("users", getUsersList());
     }
 
-    protected void addAttributesAddUser(Model model) {
-        addAttributes(model);
+    protected void AddAttributesAddUser(Model model) {
+        AddAttributes(model);
         model.addAttribute("roles", Roles.values());
     }
 
-    protected void priceQuantity(Model model, List<Orders> ordersList) {
+    protected void PriceQuantity(Model model, List<Orders> ordersList) {
         int price = 0, quantity = 0;
         for (Orders i : ordersList) {
             price += i.getFullPrice();
@@ -181,7 +204,7 @@ public class Global {
         model.addAttribute("quantity", quantity);
     }
 
-    protected void fullPriceAndFullQuantity(Long idOrders) {
+    protected void FullPriceAndFullQuantity(Long idOrders) {
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrders);
         int fullPrice = 0, fullQuantity = 0;
 

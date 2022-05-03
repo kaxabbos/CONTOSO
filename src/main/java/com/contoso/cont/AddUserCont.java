@@ -13,7 +13,7 @@ public class AddUserCont extends Global {
 
     @GetMapping("/addUser")
     public String AddUser(Model model) {
-        addAttributesAddUser(model);
+        AddAttributesAddUser(model);
         return "addUser";
     }
 
@@ -21,7 +21,7 @@ public class AddUserCont extends Global {
     public String AddNewUser(Model model,@RequestParam String username, @RequestParam String password, @RequestParam String fio, @RequestParam Roles role) {
         if (repoUsers.findByUsernameAndPassword(username, password) != null) {
             model.addAttribute("message", "Пользователь с таким логином и паролем уже существует");
-            addAttributes(model);
+            AddAttributes(model);
             return "addUser";
         }
         repoUsers.save(new Users(username, password, fio, role, defAvatar));

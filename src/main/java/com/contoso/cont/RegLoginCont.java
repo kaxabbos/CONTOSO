@@ -13,7 +13,7 @@ public class RegLoginCont extends Global {
 
     @GetMapping("/reg")
     public String reg(Model model) {
-        addAttributes(model);
+        AddAttributes(model);
         return "reg";
     }
 
@@ -21,13 +21,13 @@ public class RegLoginCont extends Global {
     public String regUser(Model model,@RequestParam String username, @RequestParam String fio, @RequestParam String password, @RequestParam String passwordRepeat) {
         if (repoUsers.findByUsernameAndPassword(username, password) != null) {
             model.addAttribute("message", "Пользователь с таким логином и паролем уже существует");
-            addAttributes(model);
+            AddAttributes(model);
             return "reg";
         }
 
         if (!password.equals(passwordRepeat)) {
             model.addAttribute("message", "Некорректный ввод паролей");
-            addAttributes(model);
+            AddAttributes(model);
             return "reg";
         }
 
@@ -38,7 +38,7 @@ public class RegLoginCont extends Global {
 
     @GetMapping("/login")
     public String Login(Model model) {
-        addAttributes(model);
+        AddAttributes(model);
         return "login";
     }
 

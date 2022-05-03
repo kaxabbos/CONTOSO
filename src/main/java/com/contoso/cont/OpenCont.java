@@ -9,7 +9,7 @@ public class OpenCont extends Global {
 
     @GetMapping("/open")
     public String Open(Model model){
-        addAttributesOpen(model);
+        AddAttributesOpen(model);
         return "open";
     }
 

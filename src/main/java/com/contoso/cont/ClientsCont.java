@@ -13,7 +13,7 @@ public class ClientsCont extends Global {
 
     @GetMapping("/clients")
     public String Clients(Model model) {
-        addAttributesClients(model);
+        AddAttributesClients(model);
         return "clients";
     }
 
