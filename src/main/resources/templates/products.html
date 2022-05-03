@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Продукты</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Продукты</h3>
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-success" roles="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+                <hr>
+                <h5 class="text-dark mb-4">Загрузить csv-файл</h5>
+                <form action="/product/csv" method="post" class="mb-20px" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <input class="form-control" type="file" name="file" required>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                            <button class="btn btn-primary btn-sm fs-16px" type="submit">Загрузить</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <h5 class="text-dark mb-4">Добавить новую продукцию</h5>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="nameModel">
+                            <strong>Наименование продукции и модель</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                </div>
+                <form action="/product/add" method="post" class="mb-20px">
+                    <div class="row">
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <select class="form-select" id="nameModel" name="nameModel">
+                                <option th:each="nameModel : ${productNameModel}"
+                                        th:label="${nameModel}" th:value="${nameModel}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                            <button class="btn btn-primary btn-sm fs-16px" type="submit">Добавить</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <h5 class="text-dark mb-4">Редактировать</h5>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ИД</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Наименование продукции и модель</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Количество</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Цена за единицу продукции</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px"></div>
+                </div>
+                <div th:each="product : ${products}" class="row mb-5px">
+                    <div class="col">
+                        <form th:action="'/product/' + ${product.id} + '/edit'" method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <input th:value="${product.id}" class="form-control" type="text" name="id" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <select class="form-select" name="nameModel">
+                                        <option th:each="nameModel : ${productNameModel}"
+                                                th:label="${nameModel}" th:value="${nameModel}"
+                                                th:selected="${product.nameModel == nameModel}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <input th:value="${product.quantity}" class="form-control" type="number" min="0"
+                                           name="quantity" required>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <input th:value="${product.unitPrice}" class="form-control" type="number" min="0"
+                                           name="unitPrice" required>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <button class="btn btn-primary btn-sm fs-16px" type="submit">
+                                        Изменить
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px">
+                        <a th:href="'/product/' + ${product.id} + '/delete'" class="btn btn-danger btn-sm fs-16px">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

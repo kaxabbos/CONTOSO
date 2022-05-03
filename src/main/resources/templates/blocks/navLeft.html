@@ -1,0 +1,101 @@
+<nav th:fragment="nav">
+    <div class="container-fluid d-flex flex-column p-0"><a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+            href="/index">
+        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-pen-square"></i></div>
+        <div class="sidebar-brand-text mx-3"><span>CONTOSO</span></div>
+    </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li th:if="${role == 'Менеджер'}" class="nav-item">
+                <a class="nav-link" href="/orders">
+                    <i class="far fa-plus-square icons"></i><span>Оформление заказа</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
+                <a class="nav-link" href="/payments">
+                    <i class="far fa-money-bill-alt icons"></i><span>Оплата</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
+                <a class="nav-link" href="/open">
+                    <i class="far fa-folder-open icons"></i><span>Открыто</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
+                <a class="nav-link" href="/under">
+                    <i class="fas fa-shopping-cart icons"></i><span>Под заказ</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
+                <a class="nav-link" href="/shipment">
+                    <i class="fas fa-truck-loading   icons"></i><span>В отгрузке</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
+                <a class="nav-link" href="/shipped">
+                    <i class="fas fa-shipping-fast icons"></i><span>Отгружено</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер'}" class="nav-item">
+                <a class="nav-link" href="/products">
+                    <i class="fas fa-table icons"></i><span>Продукты</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Менеджер'}" class="nav-item">
+                <a class="nav-link" href="/clients">
+                    <i class="fas fa-table icons"></i><span>Клиенты</span>
+                </a>
+            </li>
+            <li th:if="${role != 'NOT' && role != 'Сотрудник' && role != 'Админ'}" class="nav-item">
+                <a class="nav-link" href="/statProd">
+                    <i class="far fa-list-alt icons"></i><span>Статистика продукции</span>
+                </a>
+            </li>
+            <li th:if="${role != 'NOT' && role != 'Сотрудник' && role != 'Админ'}" class="nav-item">
+                <a class="nav-link" href="/statOrders">
+                    <i class="far fa-list-alt icons"></i><span>Статистика заказов</span>
+                </a>
+            </li>
+            <li th:if="${role != 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/index">
+                    <i class="far fa-user icons"></i><span>Профиль</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Админ'}" class="nav-item">
+                <a class="nav-link" href="/profiles">
+                    <i class="fas fa-users icons"></i><span>Сотрудники</span>
+                </a>
+            </li>
+            <li th:if="${role == 'Админ'}" class="nav-item">
+                <a class="nav-link" href="/addUser">
+                    <i class="fas fa-plus icons"></i><span>Добавить сотрудника</span>
+                </a>
+            </li>
+            <li th:if="${role == 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/login">
+                    <i class="icon-login icons"></i><span>Вход</span>
+                </a>
+            </li>
+            <li th:if="${role == 'NOT'}" class="nav-item">
+                <a class="nav-link" href="/register">
+                    <i class="fas fa-user-plus icons"></i><span>Регистрация</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">
+                    <i class="far fa-star icons"></i><span>О нас</span>
+                </a>
+            </li>
+            <li th:if="${role != 'NOT'}" class="nav-item">
+                <form class="nav-link" action="/logout" method="post">
+                    <i class="icon-logout icons"></i>
+                    <button class="btn button-logout" type="submit">Выход</button>
+                </form>
+            </li>
+        </ul>
+        <div class="text-center d-none d-md-inline">
+            <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Оплата</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Оплата</h3>
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-success" roles="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ИД и ФИО клиента</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Дата</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Стоимость заказа</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Количество</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Тип оплаты</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">Действие</div>
+                </div>
+                <div th:each="payment : ${payments}" class="row mb-5px">
+                    <div class="col">
+                        <form th:action="'/payments/' + ${payment.getId()} + '/edit'" method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${payment.idFioClient}" class="form-control" type="text" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <input th:value="${payment.date}" class="form-control" type="date" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <input th:value="${payment.fullPrice}" class="form-control" type="number" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <input th:value="${payment.fullQuantity}" class="form-control" type="number"
+                                           readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                    <select class="form-select" name="paymentType">
+                                        <option th:each="paymentType : ${paymentTypes}"
+                                                th:value="${paymentType}" th:label="${paymentType}"
+                                                th:selected="${paymentType == payment.paymentType}">
+                                            Выберите
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <button class="btn btn-primary btn-sm fs-16px" type="submit">
+                                        Изменить
+                                    </button>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px">
+                                    <a th:href="'/orders/' + ${payment.id} + '/details'"
+                                       class="btn btn-primary btn-sm fs-16px" type="submit">
+                                        Детали
+                                    </a>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
+                                    <select class="form-select"
+                                            onchange="window.location.href = this.options[this.selectedIndex].value">
+                                        <option value="/orders">Выберите</option>
+                                        <option class="alert-primary"
+                                                th:value="'/orders/' + ${payment.id} + '/shipment'">В отгрузку
+                                        </option>
+                                        <option class="alert-danger"
+                                                th:value="'/payments/' + ${payment.id} + '/delete'">Удалить
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-5px" style="color: rgb(0,0,0);">
+                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
+                        <span class="justify-content-lg-start">Суммарная стоимость всех заказов:&nbsp;</span>
+                        <span th:text="${price}" class="justify-content-lg-end"></span>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
+                        <span class="justify-content-lg-start">Суммарная количество всех заказов:&nbsp;</span>
+                        <span th:text="${quantity}" class="justify-content-lg-end">Text</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.select').change(function () {
+            window.location.href = $(this).val();
+        });
+    });
+</script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

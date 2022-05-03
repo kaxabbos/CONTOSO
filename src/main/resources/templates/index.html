@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Мой профиль</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Мой профиль</h3>
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-success" roles="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-4">
+                        <div class="card mb-3">
+                            <div class="card-body text-center shadow">
+                                <img th:src="'/img/' + ${avatar}" class="rounded-circle border mb-3 mt-4"
+                                     height="160" width="160">
+                                <div class="mb-3">
+                                    <form action="/index/avatar" method="post" enctype="multipart/form-data">
+                                        <input class="form-control" type="file" name="avatar" required
+                                               accept="image/*">
+                                        <button class="btn btn-primary mt-10px" type="submit">Изменить</button>
+                                    </form>
+                                </div>
+                                <label class="form-label text-dark">
+                                    <strong>*В имени картинки не должны содержаться пробелы</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card shadow mb-3">
+                                    <div class="card-header py-3">
+                                        <p class="text-dark m-0 fw-bold">Настройки профиля</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/index/edit" method="post">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label class="col-form-label text-dark" for="fio">
+                                                        <strong>ФИО</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input th:value="${user.fio}"
+                                                           class="form-control" type="text" id="fio" placeholder="ФИО"
+                                                           name="fio">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label class="col-form-label text-dark justify-content-lg-center align-items-lg-center"
+                                                           for="password_old">
+                                                        <strong>Текущий пароль</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="col-form-label text-dark" for="password">
+                                                        <strong>Новый пароль</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="col-form-label text-dark" for="password_repeat">
+                                                        <strong>Повторите новый пароль</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-10px">
+                                                <div class="col">
+                                                    <input class="form-control" type="password" id="password_old"
+                                                           name="passwordOld">
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-control" type="password" id="password"
+                                                           name="password">
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-control" type="password" id="password_repeat"
+                                                           name="passwordRepeat">
+                                                </div>
+                                            </div>
+                                            <label class="form-label text-dark">
+                                                <strong>*Для изменения данных введите текущий пароль</strong>
+                                            </label>
+                                            <div class="mb-3">
+                                                <button class="btn btn-primary" type="submit">
+                                                    Сохранить изменения
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

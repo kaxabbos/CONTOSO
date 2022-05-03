@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - О нас</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-1" style="padding-bottom: 24px;">О нас</h3>
+                <img class="rounded about-img" src="/img/about_img.jpg" width="100%">
+                <div class="mb-3">
+                    <p align="justify">
+                        &nbsp;&nbsp;&nbsp;&nbsp;Наша компания CONTOSO занимается производством и последующей продажей канцлерских товаров.  Для этого у компании есть отдел закупок, который закупает сырьё и материалы у внешних поставщиков и производственный отдел, который производит продукцию. У компании есть собственный склад, который управляется отделом складской логистики, на котором компания хранит сырьё и материалы, а также готовую продукцию. Также в компании есть собственный отдел продаж, который занимается реализацией произведенной продукции.
+                    </p>
+                    <p align="justify">
+                        &nbsp;&nbsp;&nbsp;&nbsp;У нас вы можете заказать ручки и карандаши разных видов. Если вам нужны полуфабрикаты нашей продукции (карандаш без покраски или ручка в разобранном виде), вы также можете их заказать.
+                    </p>
+                    <p align="justify">
+                        &nbsp;&nbsp;&nbsp;&nbsp;Мы пользуемся большим спросом на рынке. Мы обслуживаем как физических, так и юридических лиц. Занимаемся розничной и оптовой торговлей. Всё что вам нужно, чтобы получить нашу продукцию – это позвонить нашим менеджерам и оформить заказ!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

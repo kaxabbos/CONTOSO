@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Сотрудники</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Сотрудники</h3>
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-success" roles="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Логин</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Пароль</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ФИО</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Должность</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                </div>
+                <div th:each="user : ${users}" class="row mb-10px">
+                    <div class="col">
+                        <form th:action="'/profiles/' + ${user.id} + '/edit'" method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${user.username}" class="form-control" type="text" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${user.password}" class="form-control" type="text" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${user.fio}" class="form-control" type="text" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <select class="form-select" name="role">
+                                        <option th:each="roles : ${roles}" th:label="${roles}"
+                                                th:value="${roles}" th:selected="${roles == user.role}"></option>
+                                    </select>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <button class="btn btn-primary btn-sm fs-16px" type="submit">
+                                        Изменить
+                                    </button>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <a th:href="'/profiles/' + ${user.id} + '/delete'"
+                                       class="btn btn-danger btn-sm fs-16px">Удалить</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

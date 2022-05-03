@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Вход</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body class="bg-gradient-primary">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-10">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+                <div class="card-body p-0">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">С возвращением!</h4>
+                        </div>
+                        <form action="/login" method="post" class="user">
+                            <div class="mb-3">
+                                <input class="form-control form-control-user fs-14px" placeholder="Логин"
+                                       name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control form-control-user fs-14px" type="password"
+                                       placeholder="Пароль" name="password" required>
+                            </div>
+                            <button class="btn btn-primary btn-reg" type="submit">Вход</button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small mr-10px" href="/reg">Регистрация</a>
+                            <a class="small ml-10px" href="/about">О нас</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

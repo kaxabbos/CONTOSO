@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CONTOSO - Клиенты</title>
+</head>
+
+<head th:insert="blocks\head :: head"></head>
+
+<body id="page-top">
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+         th:insert="blocks/navLeft :: nav"></nav>
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <div th:insert="blocks/navTop :: nav"></div>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Клиенты</h3>
+                <hr>
+                <h5 class="text-dark mb-4">Добавить нового клиента</h5>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="fio">
+                            <strong>ФИО</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark" for="tel">
+                            <strong>Телефон</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                </div>
+                <form action="/client/add" method="post" class="mb-20px">
+                    <div class="row">
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <input class="form-control" type="text" name="fio" id="fio" required>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                            <input class="form-control" type="tel" name="tel" id="tel"
+                                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                                   placeholder="999-99-999-99-99" required>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                            <button class="btn btn-primary btn-sm fs-16px" type="submit">Добавить</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <h5 class="text-dark mb-4">Редактировать</h5>
+                <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ИД</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ФИО</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Телефон</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px"></div>
+                </div>
+                <div th:each="client : ${clients}" class="row mb-5px">
+                    <div class="col">
+                        <form th:action="'/client/' + ${client.id} + '/edit'" method="post">
+                            <div class="row">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <input th:value="${client.id}" class="form-control" type="text" name="id" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${client.fio}" class="form-control" type="text" name="fio"
+                                           required>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                                    <input th:value="${client.tel}" class="form-control" type="tel"
+                                           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                                           placeholder="999-99-999-99-99" name="tel" required>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <button class="btn btn-primary btn-sm fs-16px" type="submit">Изменить</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px">
+                        <a th:href="'/client/' + ${client.id} + '/delete'"
+                           class="btn btn-danger btn-sm fs-16px">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="blocks\footer :: footer"
+                class="bg-white d-lg-flex justify-content-lg-center align-items-lg-center sticky-footer mxh-40px">
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

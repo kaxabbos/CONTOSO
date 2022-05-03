@@ -1,0 +1,26 @@
+package com.contoso.cont;
+
+import com.contoso.models.enums.OrderStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class StatOrdersCont extends Global {
+
+    @GetMapping("/statOrders")
+    public String statOrders(Model model) {
+        addAttributesStatOrders(model, OrderStatus.Все);
+        return "statOrders";
+    }
+
+    @PostMapping("/statOrders/status")
+    public String statOrdersStatus(Model model, @RequestParam OrderStatus orderStatus) {
+        addAttributesStatOrders(model, orderStatus);
+        return "statOrders";
+    }
+
+
+}
