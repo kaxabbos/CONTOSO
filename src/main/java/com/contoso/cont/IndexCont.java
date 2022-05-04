@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,7 +33,6 @@ public class IndexCont extends Global {
 
     @PostMapping("/index/edit")
     public String profileEdit(Model model, @RequestParam String fio, @RequestParam String passwordOld, @RequestParam String password, @RequestParam String passwordRepeat) {
-
         Users user = getUser();
 
         if (!passwordOld.equals(user.getPassword())) {
@@ -76,6 +77,16 @@ public class IndexCont extends Global {
                 return "index";
             }
             Users user = getUser();
+            if (!user.getAvatar().equals(defAvatar)) {
+                try {
+                    Files.delete(Paths.get(uploadImg + "/" + user.getAvatar()));
+                } catch (IOException e) {
+                    model.addAttribute("message", "Не удалось изменить аватарку");
+                    AddAttributesIndex(model);
+                    return "index";
+                }
+            }
+
             user.setAvatar(res);
             repoUsers.save(user);
         }

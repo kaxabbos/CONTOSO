@@ -25,7 +25,6 @@ public class StatusesCont extends Global {
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(id);
         Products product;
 
-        System.out.println(orderDetailsList.size());
         if (orderDetailsList.size() == 0) {
             AddAttributesOrders(model);
             model.addAttribute("message", "Не выбраны детали заказа: " + order.getId() + " - " + order.getIdFioClient());

@@ -19,8 +19,6 @@ public class StatProdCont extends Global {
     @PostMapping("/statProd")
     public String statProdSearch(Model model, @RequestParam ProductStatus productStatus, @RequestParam String date) {
         AddAttributesStatProd(model, productStatus, date);
-        System.out.println(date);
         return "statProd";
     }
-
 }
