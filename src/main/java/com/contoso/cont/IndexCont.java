@@ -86,7 +86,6 @@ public class IndexCont extends Global {
                     return "index";
                 }
             }
-
             user.setAvatar(res);
             repoUsers.save(user);
         }
