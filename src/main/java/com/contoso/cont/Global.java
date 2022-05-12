@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -77,7 +78,10 @@ public class Global {
         AddAttributes(model);
         model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrders));
         model.addAttribute("order", repoOrders.getById(idOrders));
-        model.addAttribute("products", repoProducts.findAll());
+        List<Products> temp = repoProducts.findAll();
+        List<Products> products = new ArrayList<>();
+        for (Products i : temp) if (i.getQuantity() != 0) products.add(i);
+        model.addAttribute("products", products);
     }
 
     protected void AddAttributesOrders(Model model) {

@@ -1,6 +1,7 @@
 package com.contoso.cont;
 
 import com.contoso.models.Orders;
+import com.contoso.models.enums.OrderStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +24,12 @@ public class OrdersCont extends Global {
     public String OrderAdd(Model model, @RequestParam String idFioClient, @RequestParam String date) {
         List<Orders> ordersList = repoOrders.findAll();
         for (Orders i : ordersList) {
-            if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date)) {
+            if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date) && i.getStatus() == OrderStatus.Не_зарезервировано) {
                 AddAttributesOrders(model);
                 model.addAttribute("message", "Заказ для этого клиента с этой датой уже существует");
                 return "orders";
             }
         }
-
         Orders orders = new Orders(idFioClient, date);
         repoOrders.save(orders);
         return "redirect:/orders";
@@ -46,12 +46,10 @@ public class OrdersCont extends Global {
                 return "orders";
             }
         }
-
         Orders orders = repoOrders.getById(id);
         orders.setIdFioClient(idFioClient);
         orders.setDate(date);
         repoOrders.save(orders);
         return "redirect:/orders";
     }
-
 }
