@@ -33,8 +33,11 @@ public class ProductsCont extends Global {
     }
 
     @PostMapping("/product/add")
-    public String ProductAdd(@RequestParam ProductNameModel nameModel) {
-        repoProducts.save(new Products(nameModel, 0, 0));
+    public String ProductAdd(@RequestParam ProductNameModel nameModel, @RequestParam int quantity, @RequestParam int unitPrice) {
+        Products product = repoProducts.saveAndFlush(new Products(nameModel, quantity, unitPrice));
+        String dateNow = LocalDateTime.now().toString();
+        StatProducts statProducts = new StatProducts(quantity, dateNow.substring(0, 10), product.getId(), null, ProductStatus.Произведено);
+        repoStatProducts.save(statProducts);
         return "redirect:/products";
     }
 

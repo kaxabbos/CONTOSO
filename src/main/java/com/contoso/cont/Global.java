@@ -151,6 +151,8 @@ public class Global {
                 max -= i.getQuantity();
         }
 
+        model.addAttribute("selectedStatus", productStatus);
+        model.addAttribute("selectedDate", date);
         model.addAttribute("statProducts", statProducts);
         model.addAttribute("max", max);
         model.addAttribute("ProductStatus", ProductStatus.values());
@@ -168,6 +170,7 @@ public class Global {
         }
 
         model.addAttribute("orders", ordersList);
+        model.addAttribute("selectedStatus", orderStatus);
         model.addAttribute("statuses", OrderStatus.values());
         model.addAttribute("productStats", ProductStatus.values());
     }

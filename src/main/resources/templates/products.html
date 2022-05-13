@@ -41,6 +41,16 @@
                             <strong>Наименование продукции и модель</strong>
                         </label>
                     </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark" for="quantity">
+                            <strong>Количество</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark" for="unitPrice">
+                            <strong>Цена за единицу продукции</strong>
+                        </label>
+                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px"></div>
                 </div>
                 <form action="/product/add" method="post" class="mb-20px">
@@ -51,6 +61,12 @@
                                         th:label="${nameModel}" th:value="${nameModel}">
                                 </option>
                             </select>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                            <input class="form-control" type="number" min="1" name="quantity" id="quantity" required>
+                        </div>
+                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                            <input class="form-control" type="number" min="1" name="unitPrice" id="unitPrice" required>
                         </div>
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
                             <button class="btn btn-primary btn-sm fs-16px" type="submit">Добавить</button>
@@ -99,11 +115,11 @@
                                     </select>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
-                                    <input th:value="${product.quantity}" class="form-control" type="number" min="0"
+                                    <input th:value="${product.quantity}" class="form-control" type="number" min="1"
                                            name="quantity" required>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
-                                    <input th:value="${product.unitPrice}" class="form-control" type="number" min="0"
+                                    <input th:value="${product.unitPrice}" class="form-control" type="number" min="1"
                                            name="unitPrice" required>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">

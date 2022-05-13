@@ -23,14 +23,14 @@ public class OrderDetailsCont extends Global {
     public String OrderAddProduct(Model model, @PathVariable Long idOrders, @RequestParam Long idProduct) {
         if (repoProducts.getById(idProduct).getQuantity() == 0){
             AddAttributesOrderDetails(model, idOrders);
-            model.addAttribute("message", "Этого товара нету в наличии");
+            model.addAttribute("message", "Этого продукта нету в наличии");
             return "orderDetails";
         }
 
         for (OrderDetails i : repoOrderDetails.findByIdOrders(idOrders)) {
             if (i.getIdProduct().equals(idProduct)) {
                 AddAttributesOrderDetails(model, idOrders);
-                model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же товара");
+                model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же продукт");
                 return "orderDetails";
             }
         }
@@ -52,7 +52,7 @@ public class OrderDetailsCont extends Global {
             for (OrderDetails i : orderDetailsList) {
                 if (i.getIdProduct().equals(idProduct)) {
                     AddAttributesOrderDetails(model, idOrders);
-                    model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же товара");
+                    model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же продукт");
                     return "orderDetails";
                 }
             }
@@ -63,7 +63,7 @@ public class OrderDetailsCont extends Global {
         else orderDetails.setQuantity(quantity);
 
         orderDetails.setPrice(orderDetails.getUnitPrice() * orderDetails.getQuantity());
-
+        
         repoOrderDetails.save(orderDetails);
 
         FullPriceAndFullQuantity(idOrders);

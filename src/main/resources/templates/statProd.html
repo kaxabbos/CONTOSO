@@ -34,12 +34,12 @@
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                             <select class="form-select" id="view" name="productStatus">
                                 <option th:each="status : ${ProductStatus}"
-                                        th:label="${status}"
-                                        th:value="${status}"></option>
+                                        th:label="${status}" th:value="${status}"
+                                        th:selected="${status == selectedStatus}"></option>
                             </select>
                         </div>
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                            <input class="form-control" type="date" id="date" name="date">
+                            <input th:value="${selectedDate}" class="form-control" type="date" id="date" name="date">
                         </div>
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-75px">
                             <button class="btn btn-primary btn-sm fs-16px" type="submit">Поиск</button>

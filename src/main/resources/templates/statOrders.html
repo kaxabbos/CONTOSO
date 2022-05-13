@@ -24,12 +24,13 @@
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-75px"></div>
                 </div>
-                <form action="/statOrders/orderStatus" method="post" class="mb-20px">
+                <form action="/statOrders/status" method="post" class="mb-20px">
                     <div class="row">
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                             <select class="form-select" id="orderStatus" name="orderStatus">
                                 <option th:each="orderStatus : ${statuses}"
-                                        th:value="${orderStatus}" th:label="${orderStatus}">
+                                        th:value="${orderStatus}" th:label="${orderStatus}"
+                                        th:selected="${orderStatus == selectedStatus}">
                                 </option>
                             </select>
                         </div>
