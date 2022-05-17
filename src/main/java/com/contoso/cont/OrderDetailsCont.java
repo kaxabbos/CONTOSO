@@ -37,9 +37,7 @@ public class OrderDetailsCont extends Global {
 
         OrderDetails orderDetails = new OrderDetails(repoProducts.getById(idProduct), idOrders);
         repoOrderDetails.save(orderDetails);
-
         FullPriceAndFullQuantity(idOrders);
-
         return "redirect:/orders/{idOrders}/orderDetails";
     }
 

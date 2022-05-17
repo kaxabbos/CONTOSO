@@ -22,6 +22,11 @@
                     </div>
                 </div>
                 <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ИД заказа</strong>
+                        </label>
+                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
                             <strong>ИД и ФИО клиента</strong>
@@ -46,6 +51,9 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">Действие</div>
                 </div>
                 <div th:each="shipment : ${shipments}" class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                        <input th:value="${shipment.id}" class="form-control" type="text" readonly>
+                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${shipment.idFioClient}" class="form-control" type="text" readonly>
                     </div>

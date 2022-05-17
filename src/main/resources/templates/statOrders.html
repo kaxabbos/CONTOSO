@@ -41,14 +41,24 @@
                 </form>
                 <hr>
                 <div class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
                         <label class="col-form-label text-center text-dark">
                             <strong>ИД заказа</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>Стоимость</strong>
+                            <strong>ИД и ФИО клиента</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Дата</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>Стоимость заказа</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
@@ -63,8 +73,14 @@
                     </div>
                 </div>
                 <div th:each="order : ${orders}" class="row mb-5px">
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
                         <input th:value="${order.id}" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <input th:value="${order.idFioClient}" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                        <input th:value="${order.date}" class="form-control" type="date" name="date" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${order.fullPrice}" class="form-control" type="number" readonly>

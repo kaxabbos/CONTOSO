@@ -12,5 +12,4 @@ public class AboutCont extends Global {
         AddAttributes(model);
         return "about";
     }
-
 }

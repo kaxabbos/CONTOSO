@@ -33,6 +33,11 @@
                             <a class="small mr-10px" href="/reg">Регистрация</a>
                             <a class="small ml-10px" href="/about">О нас</a>
                         </div>
+                        <div th:if="${param.error}" class="text-center mt-20px">
+                            <div class="alert alert-success" role="alert">
+                                <strong><span>Некорректный ввод логина или пароля</span></strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
