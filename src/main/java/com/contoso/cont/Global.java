@@ -45,7 +45,6 @@ public class Global {
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
         Products product;
         for (OrderDetails i : orderDetailsList) {
-            repoOrderDetails.deleteById(i.getId());
             repoStatProducts.delete(repoStatProducts.findByIdOrderDetails(i.getId()));
             product = repoProducts.getById(i.getIdProduct());
             product.setQuantity(product.getQuantity() + i.getQuantity());
@@ -54,6 +53,9 @@ public class Global {
                 j.setQuantityMax(product.getQuantity());
                 repoOrderDetails.save(j);
             }
+        }
+        for (OrderDetails i : orderDetailsList) {
+            repoOrderDetails.deleteById(i.getId());
         }
     }
 
