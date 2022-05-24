@@ -179,6 +179,9 @@ public class Global {
         AddAttributes(model);
         List<Products> products = repoProducts.findAll();
         Collections.reverse(products);
+        int quantity = 0;
+        for (Products i : products) quantity += i.getQuantity();
+        model.addAttribute("quantity", quantity);
         model.addAttribute("products", products);
         model.addAttribute("productNameModel", ProductNameModel.values());
     }

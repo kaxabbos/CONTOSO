@@ -124,14 +124,19 @@ public class ProductsCont extends Global {
     @GetMapping("/product/{id}/delete")
     public String ProductDelete(Model model, @PathVariable Long id) {
         List<OrderDetails> orderDetails = repoOrderDetails.findByIdProduct(id);
-        if (orderDetails != null) {
+        if (orderDetails.size() != 0) {
             Products products = repoProducts.getById(id);
             AddAttributesProducts(model);
             model.addAttribute("message", "Продукт " + products.getId() + " - " + products.getNameModel() + " используется");
             return "products";
         }
+        if (repoProducts.getById(id).getQuantity() != 0){
+            AddAttributesProducts(model);
+            Products products = repoProducts.getById(id);
+            model.addAttribute("message", "Продукт " + products.getId() + " - " + products.getNameModel() + " еще не отгружен");
+            return "products";
+        }
         repoProducts.deleteById(id);
-        repoStatProducts.delete(repoStatProducts.findByIdProduct(id));
         return "redirect:/products";
     }
 }
