@@ -68,6 +68,11 @@
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
+                            <strong>Тип оплаты</strong>
+                        </label>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <label class="col-form-label text-center text-dark">
                             <strong>Состояние</strong>
                         </label>
                     </div>
@@ -87,6 +92,12 @@
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${order.fullQuantity}" class="form-control" type="number" readonly>
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <input th:if="${unselectPaymentType == order.paymentType}" value="Не выбрана"
+                               class="form-control" type="text" readonly>
+                        <input th:if="${unselectPaymentType != order.paymentType}" th:value="${order.paymentType}"
+                               class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <input th:value="${order.status}" class="form-control" type="text" readonly>

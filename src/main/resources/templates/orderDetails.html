@@ -46,7 +46,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark" for="products">
-                            <strong>ИД, наименование и модель продукта</strong>
+                            <strong>Наименование, ИД, модель и имеющееся количество продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
@@ -58,7 +58,7 @@
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                     <select class="form-select" id="products" name="idProduct">
                                         <option th:each="product : ${products}" th:value="${product.id}"
-                                                th:label="${product.id} + ' - ' + ${product.nameModel}"></option>
+                                                th:label="${product.nameModel} + ' - ' + ${product.id} + ' - ' + ${product.quantity}"></option>
                                     </select>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px">

@@ -80,7 +80,7 @@ public class Global {
         AddAttributes(model);
         model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrders));
         model.addAttribute("order", repoOrders.getById(idOrders));
-        List<Products> temp = repoProducts.findAll();
+        List<Products> temp = repoProducts.findAllByOrderByNameModel();
         List<Products> products = new ArrayList<>();
         for (Products i : temp) if (i.getQuantity() != 0) products.add(i);
         model.addAttribute("products", products);
@@ -172,6 +172,7 @@ public class Global {
         }
 
         model.addAttribute("orders", ordersList);
+        model.addAttribute("unselectPaymentType", PaymentType.Выберите);
         model.addAttribute("selectedStatus", orderStatus);
         model.addAttribute("statuses", OrderStatus.values());
         model.addAttribute("productStats", ProductStatus.values());
@@ -198,7 +199,7 @@ public class Global {
     protected void AddAttributesProfiles(Model model) {
         AddAttributes(model);
         model.addAttribute("roles", Roles.values());
-        model.addAttribute("users", getUsersList());
+        model.addAttribute("users", repoUsers.findAllByOrderByRole());
     }
 
     protected void AddAttributesAddUser(Model model) {
@@ -229,14 +230,6 @@ public class Global {
         orders.setFullPrice(fullPrice);
         orders.setFullQuantity(fullQuantity);
         repoOrders.save(orders);
-    }
-
-    protected List<Users> getUsersList() {
-        List<Users> temp = repoUsers.findByRole(Roles.Руководитель);
-        temp.addAll(repoUsers.findByRole(Roles.Менеджер));
-        temp.addAll(repoUsers.findByRole(Roles.Админ));
-        temp.addAll(repoUsers.findByRole(Roles.Сотрудник));
-        return temp;
     }
 
     protected Users getUser() {
