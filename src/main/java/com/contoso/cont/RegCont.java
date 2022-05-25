@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class RegLoginCont extends Global {
+public class RegCont extends Global {
 
     @GetMapping("/reg")
     public String reg(Model model) {
@@ -33,10 +33,5 @@ public class RegLoginCont extends Global {
         repoUsers.save(new Users(username, password, fio, Roles.Сотрудник, defAvatar));
 
         return "redirect:/login";
-    }
-
-    @GetMapping("/login")
-    public String Login(Model model) {
-        return "login";
     }
 }
