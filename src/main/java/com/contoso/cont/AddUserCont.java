@@ -19,8 +19,8 @@ public class AddUserCont extends Global {
 
     @PostMapping("/add/user")
     public String AddNewUser(Model model,@RequestParam String username, @RequestParam String password, @RequestParam String fio, @RequestParam Roles role) {
-        if (repoUsers.findByUsernameAndPassword(username, password) != null) {
-            model.addAttribute("message", "Пользователь с таким логином и паролем уже существует");
+        if (repoUsers.findByUsername(username) != null) {
+            model.addAttribute("message", "Пользователь с таким логином уже существует");
             AddAttributesAddUser(model);
             return "addUser";
         }

@@ -18,8 +18,8 @@ public class RegCont extends Global {
 
     @PostMapping("/reg")
     public String regUser(Model model, @RequestParam String username, @RequestParam String fio, @RequestParam String password, @RequestParam String passwordRepeat) {
-        if (repoUsers.findByUsernameAndPassword(username, password) != null) {
-            model.addAttribute("message", "Пользователь с таким логином и паролем уже существует");
+        if (repoUsers.findByUsername(username) != null) {
+            model.addAttribute("message", "Пользователь с таким логином уже существует");
             AddAttributes(model);
             return "reg";
         }
