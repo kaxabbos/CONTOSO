@@ -26,7 +26,7 @@ public class OrdersCont extends Global {
         for (Orders i : ordersList) {
             if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date) && i.getStatus() == OrderStatus.Не_зарезервировано) {
                 AddAttributesOrders(model);
-                model.addAttribute("message", "Заказ для этого клиента с этой датой уже существует");
+                model.addAttribute("message", "Заказ для клиента \"" + idFioClient + "\" с датой \"" + date + "\" в оформлении");
                 return "orders";
             }
         }
@@ -40,9 +40,9 @@ public class OrdersCont extends Global {
         List<Orders> ordersList = repoOrders.findAll();
         for (Orders i : ordersList) {
             if (i.getId().equals(id)) continue;
-            if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date)) {
+            if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date) && i.getStatus() == OrderStatus.Не_зарезервировано) {
                 AddAttributesOrders(model);
-                model.addAttribute("message", "Заказ для этого клиента с этой датой уже существует");
+                model.addAttribute("message", "Заказ для клиента \"" + idFioClient + "\" с датой \"" + date + "\" в оформлении");
                 return "orders";
             }
         }

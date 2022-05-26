@@ -127,13 +127,13 @@ public class ProductsCont extends Global {
         if (orderDetails.size() != 0) {
             Products products = repoProducts.getById(id);
             AddAttributesProducts(model);
-            model.addAttribute("message", "Продукт " + products.getId() + " - " + products.getNameModel() + " используется");
+            model.addAttribute("message", "Продукт \"" + products.getId() + " - " + products.getNameModel() + "\" используется");
             return "products";
         }
         if (repoProducts.getById(id).getQuantity() != 0){
             AddAttributesProducts(model);
             Products products = repoProducts.getById(id);
-            model.addAttribute("message", "Продукт " + products.getId() + " - " + products.getNameModel() + " еще не отгружен");
+            model.addAttribute("message", "Продукт \"" + products.getId() + " - " + products.getNameModel() + "\" еще не отгружен");
             return "products";
         }
         repoProducts.deleteById(id);

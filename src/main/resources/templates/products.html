@@ -74,6 +74,13 @@
                     </div>
                 </form>
                 <hr>
+                <div class="row mb-5px" style="color: rgb(0,0,0);">
+                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
+                        <span class="justify-content-lg-start">Текущий остаток:&nbsp;</span>
+                        <span th:text="${quantity}" class="justify-content-lg-end"></span>
+                    </div>
+                </div>
+                <hr>
                 <h5 class="text-dark mb-4">Редактировать</h5>
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
@@ -132,13 +139,6 @@
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px">
                         <a th:href="'/product/' + ${product.id} + '/delete'" class="btn btn-danger btn-sm fs-16px">Удалить</a>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mb-5px" style="color: rgb(0,0,0);">
-                    <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
-                        <span class="justify-content-lg-start">Суммарная количество всех вродуктов:&nbsp;</span>
-                        <span th:text="${quantity}" class="justify-content-lg-end"></span>
                     </div>
                 </div>
             </div>

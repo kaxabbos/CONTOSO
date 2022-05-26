@@ -164,9 +164,9 @@ public class Global {
         List<Orders> ordersList;
 
         if (orderStatus == OrderStatus.Все) {
-            ordersList = repoOrders.findAll();
+            ordersList = repoOrders.findAllByOrderByIdDesc();
         } else {
-            ordersList = repoOrders.findByOrderStatus(orderStatus);
+            ordersList = repoOrders.findByOrderStatusOrderByIdDesc(orderStatus);
         }
 
         model.addAttribute("orders", ordersList);

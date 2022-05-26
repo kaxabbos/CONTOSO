@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center"></div>
                     <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
-                        <h6 class="text-dark justify-content-lg-start align-items-lg-start mb-4">
+                        <h6 class="text-dark justify-content-lg-start align-items-lg-start">
                             *Если дата не выбрана, выбираются все
                         </h6>
                     </div>
@@ -58,12 +58,17 @@
                 <hr>
                 <div class="row mb-5px" style="color: rgb(0,0,0);">
                     <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
-                        <span class="justify-content-lg-start">Текущий остаток:&nbsp;</span>
+                        <span class="justify-content-lg-start">Текущий остаток по выбранному состоянию и дате:&nbsp;</span>
                         <span th:text="${max}" class="justify-content-lg-end"></span>
                     </div>
                 </div>
                 <hr>
                 <div class="row mb-5px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                        <label class="col-form-label text-center text-dark">
+                            <strong>ИД</strong>
+                        </label>
+                    </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
                         <label class="col-form-label text-center text-dark">
                             <strong>ИД продукта</strong>
@@ -90,20 +95,19 @@
                         <form th:action="'/statProd/' + ${statProducts} + '/edit'">
                             <div class="row">
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                                    <input th:value="${stat.idProduct}" class="form-control" type="text"
-                                           id="username-3" placeholder="id" readonly>
+                                    <input th:value="${stat.id}" class="form-control" type="text" readonly>
+                                </div>
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
+                                    <input th:value="${stat.idProduct}" class="form-control" type="text" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <input th:value="${stat.quantity}" class="form-control" type="text"
-                                           readonly>
+                                    <input th:value="${stat.quantity}" class="form-control" type="text" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <input th:value="${stat.productStatus}" class="form-control" type="text"
-                                           readonly>
+                                    <input th:value="${stat.productStatus}" class="form-control" type="text" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <input th:value="${stat.date}" class="form-control" type="date"
-                                           readonly>
+                                    <input th:value="${stat.date}" class="form-control" type="date" readonly>
                                 </div>
                             </div>
                         </form>
