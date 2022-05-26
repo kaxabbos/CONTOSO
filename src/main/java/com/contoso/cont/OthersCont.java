@@ -1,14 +1,13 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttributes;
-import com.contoso.cont.general.General;
+import com.contoso.cont.general.AddAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class OthersCont extends AddAttributes {
+public class OthersCont extends AddAttribute {
 
     @GetMapping("/login")
     public String Login() {

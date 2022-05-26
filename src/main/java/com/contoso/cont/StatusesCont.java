@@ -1,7 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttributes;
-import com.contoso.cont.general.General;
+import com.contoso.cont.general.AddAttribute;
 import com.contoso.models.OrderDetails;
 import com.contoso.models.Orders;
 import com.contoso.models.Products;
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class StatusesCont extends AddAttributes {
+public class StatusesCont extends AddAttribute {
 
     @GetMapping("/orders/{id}/reserved")
     public String OrderArrange(Model model, @PathVariable Long id) {
@@ -98,7 +97,7 @@ public class StatusesCont extends AddAttributes {
     }
 
     @GetMapping("/orders/{id}/shipped")
-    public String OrderShipped(Model model, @PathVariable Long id) {
+    public String OrderShipped(@PathVariable Long id) {
         Orders order = repoOrders.getById(id);
 
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(id);

@@ -1,7 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttributes;
-import com.contoso.cont.general.General;
+import com.contoso.cont.general.AddAttribute;
 import com.contoso.models.Orders;
 import com.contoso.models.enums.OrderStatus;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class OrdersCont extends AddAttributes {
+public class OrdersCont extends AddAttribute {
 
     @GetMapping("/orders")
     public String Orders(Model model) {

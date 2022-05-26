@@ -1,7 +1,9 @@
 package com.contoso.cont.general;
 
-import com.contoso.models.*;
-import com.contoso.models.enums.*;
+import com.contoso.models.OrderDetails;
+import com.contoso.models.Orders;
+import com.contoso.models.Products;
+import com.contoso.models.Users;
 import com.contoso.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class General {
@@ -95,8 +96,6 @@ public class General {
         }
     }
 
-
-
     protected void PriceQuantity(Model model, List<Orders> ordersList) {
         int price = 0, quantity = 0;
         for (Orders i : ordersList) {
@@ -121,6 +120,4 @@ public class General {
         orders.setFullQuantity(fullQuantity);
         repoOrders.save(orders);
     }
-
-
 }
