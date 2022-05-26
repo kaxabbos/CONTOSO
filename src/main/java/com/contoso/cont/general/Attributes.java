@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddAttribute extends General {
+public class Attributes extends General {
 
     protected void AddAttributes(Model model) {
         model.addAttribute("role", getUserRole());

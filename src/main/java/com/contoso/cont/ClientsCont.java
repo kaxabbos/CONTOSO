@@ -1,6 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttribute;
+import com.contoso.cont.general.Attributes;
 import com.contoso.models.Clients;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ClientsCont extends AddAttribute {
+public class ClientsCont extends Attributes {
 
     @GetMapping("/clients")
     public String Clients(Model model) {

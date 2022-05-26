@@ -1,6 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttribute;
+import com.contoso.cont.general.Attributes;
 import com.contoso.models.Users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Controller
-public class IndexCont extends AddAttribute {
+public class IndexCont extends Attributes {
 
     @GetMapping("/index")
     public String Index1(Model model) {

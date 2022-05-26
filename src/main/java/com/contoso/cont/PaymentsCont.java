@@ -1,6 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttribute;
+import com.contoso.cont.general.Attributes;
 import com.contoso.models.Orders;
 import com.contoso.models.enums.PaymentType;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class PaymentsCont extends AddAttribute {
+public class PaymentsCont extends Attributes {
 
     @GetMapping("/payments")
     public String Payments(Model model) {

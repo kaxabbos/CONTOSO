@@ -1,6 +1,6 @@
 package com.contoso.cont;
 
-import com.contoso.cont.general.AddAttribute;
+import com.contoso.cont.general.Attributes;
 import com.contoso.models.OrderDetails;
 import com.contoso.models.Products;
 import com.contoso.models.ProductsCSV;
@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class ProductsCont extends AddAttribute {
+public class ProductsCont extends Attributes {
 
     @GetMapping("/products")
     public String Products(Model model) {
