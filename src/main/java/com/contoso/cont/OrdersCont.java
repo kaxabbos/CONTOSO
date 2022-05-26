@@ -35,18 +35,18 @@ public class OrdersCont extends Global {
         return "redirect:/orders";
     }
 
-    @PostMapping("/orders/{id}/edit")
-    public String OrderEdit(Model model, @RequestParam String idFioClient, @RequestParam String date, @PathVariable Long id) {
+    @PostMapping("/orders/{idOrder}/edit")
+    public String OrderEdit(Model model, @RequestParam String idFioClient, @RequestParam String date, @PathVariable Long idOrder) {
         List<Orders> ordersList = repoOrders.findAll();
         for (Orders i : ordersList) {
-            if (i.getId().equals(id)) continue;
+            if (i.getId().equals(idOrder)) continue;
             if (i.getIdFioClient().equals(idFioClient) && i.getDate().equals(date) && i.getStatus() == OrderStatus.Не_зарезервировано) {
                 AddAttributesOrders(model);
                 model.addAttribute("message", "Заказ для клиента \"" + idFioClient + "\" с датой \"" + date + "\" в оформлении");
                 return "orders";
             }
         }
-        Orders orders = repoOrders.getById(id);
+        Orders orders = repoOrders.getById(idOrder);
         orders.setIdFioClient(idFioClient);
         orders.setDate(date);
         repoOrders.save(orders);

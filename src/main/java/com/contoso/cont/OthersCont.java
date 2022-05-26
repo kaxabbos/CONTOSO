@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class OthersCont extends Global {
 
     @GetMapping("/login")
-    public String Login(Model model) {
+    public String Login() {
         return "login";
     }
 
     @GetMapping("/orders/{id}/details")
     public String Details(Model model, @PathVariable Long id) {
-        AddAttributesDetails(model,id);
+        AddAttributesDetails(model, id);
         return "details";
     }
 
@@ -26,7 +26,7 @@ public class OthersCont extends Global {
     }
 
     @GetMapping("/open")
-    public String Open(Model model){
+    public String Open(Model model) {
         AddAttributesOpen(model);
         return "open";
     }
@@ -44,7 +44,7 @@ public class OthersCont extends Global {
     }
 
     @GetMapping("/under")
-    public String Under(Model model){
+    public String Under(Model model) {
         AddAttributesUnder(model);
         return "under";
     }

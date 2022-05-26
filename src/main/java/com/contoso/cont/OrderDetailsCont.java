@@ -13,43 +13,43 @@ import java.util.List;
 @Controller
 public class OrderDetailsCont extends Global {
 
-    @GetMapping("/orders/{idOrders}/orderDetails")
-    public String Order(Model model, @PathVariable Long idOrders) {
-        AddAttributesOrderDetails(model, idOrders);
+    @GetMapping("/orders/{idOrder}/orderDetails")
+    public String Order(Model model, @PathVariable Long idOrder) {
+        AddAttributesOrderDetails(model, idOrder);
         return "orderDetails";
     }
 
-    @PostMapping("/orders/{idOrders}/orderDetails/addProduct")
-    public String OrderAddProduct(Model model, @PathVariable Long idOrders, @RequestParam Long idProduct) {
-        if (repoProducts.getById(idProduct).getQuantity() == 0){
-            AddAttributesOrderDetails(model, idOrders);
+    @PostMapping("/orders/{idOrder}/orderDetails/addProduct")
+    public String OrderAddProduct(Model model, @PathVariable Long idOrder, @RequestParam Long idProduct) {
+        if (repoProducts.getById(idProduct).getQuantity() == 0) {
+            AddAttributesOrderDetails(model, idOrder);
             model.addAttribute("message", "Этого продукта нету в наличии");
             return "orderDetails";
         }
 
-        for (OrderDetails i : repoOrderDetails.findByIdOrders(idOrders)) {
+        for (OrderDetails i : repoOrderDetails.findByIdOrders(idOrder)) {
             if (i.getIdProduct().equals(idProduct)) {
-                AddAttributesOrderDetails(model, idOrders);
+                AddAttributesOrderDetails(model, idOrder);
                 model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же продукт");
                 return "orderDetails";
             }
         }
 
-        OrderDetails orderDetails = new OrderDetails(repoProducts.getById(idProduct), idOrders);
+        OrderDetails orderDetails = new OrderDetails(repoProducts.getById(idProduct), idOrder);
         repoOrderDetails.save(orderDetails);
-        FullPriceAndFullQuantity(idOrders);
-        return "redirect:/orders/{idOrders}/orderDetails";
+        FullPriceAndFullQuantity(idOrder);
+        return "redirect:/orders/{idOrder}/orderDetails";
     }
 
-    @PostMapping("/orders/{idOrders}/orderDetails/{idOrderDetails}/edit")
-    public String OrderEditProduct(Model model, @PathVariable Long idOrders, @PathVariable Long idOrderDetails, @RequestParam Long idProduct, @RequestParam int quantity) {
-        OrderDetails orderDetails = repoOrderDetails.getById(idOrderDetails);
+    @PostMapping("/orders/{idOrder}/orderDetails/{idOrderDetail}/edit")
+    public String OrderEditProduct(Model model, @PathVariable Long idOrder, @PathVariable Long idOrderDetail, @RequestParam Long idProduct, @RequestParam int quantity) {
+        OrderDetails orderDetails = repoOrderDetails.getById(idOrderDetail);
         if (!orderDetails.getIdProduct().equals(idProduct)) {
-            List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrders);
+            List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
 
             for (OrderDetails i : orderDetailsList) {
                 if (i.getIdProduct().equals(idProduct)) {
-                    AddAttributesOrderDetails(model, idOrders);
+                    AddAttributesOrderDetails(model, idOrder);
                     model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же продукт");
                     return "orderDetails";
                 }
@@ -61,17 +61,17 @@ public class OrderDetailsCont extends Global {
         else orderDetails.setQuantity(quantity);
 
         orderDetails.setPrice(orderDetails.getUnitPrice() * orderDetails.getQuantity());
-        
+
         repoOrderDetails.save(orderDetails);
 
-        FullPriceAndFullQuantity(idOrders);
+        FullPriceAndFullQuantity(idOrder);
 
-        return "redirect:/orders/{idOrders}/orderDetails";
+        return "redirect:/orders/{idOrder}/orderDetails";
     }
 
-    @GetMapping("/orders/{idOrders}/orderDetails/{idOrderDetails}/delete")
-    public String OrderDeleteProduct(@PathVariable Long idOrders, @PathVariable Long idOrderDetails) {
-        repoOrderDetails.deleteById(idOrderDetails);
-        return "redirect:/orders/{idOrders}/orderDetails";
+    @GetMapping("/orders/{idOrder}/orderDetails/{idOrderDetail}/delete")
+    public String OrderDeleteProduct(@PathVariable Long idOrder, @PathVariable Long idOrderDetail) {
+        repoOrderDetails.deleteById(idOrderDetail);
+        return "redirect:/orders/{idOrder}/orderDetails";
     }
 }

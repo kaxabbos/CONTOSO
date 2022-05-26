@@ -64,10 +64,10 @@ public class Global {
         model.addAttribute("fio", getFIO());
     }
 
-    protected void AddAttributesDetails(Model model, Long idOrders) {
+    protected void AddAttributesDetails(Model model, Long idOrder) {
         AddAttributes(model);
-        model.addAttribute("details", repoOrderDetails.findByIdOrders(idOrders));
-        model.addAttribute("order", repoOrders.getById(idOrders));
+        model.addAttribute("details", repoOrderDetails.findByIdOrders(idOrder));
+        model.addAttribute("order", repoOrders.getById(idOrder));
     }
 
     protected void AddAttributesIndex(Model model) {
@@ -75,10 +75,10 @@ public class Global {
         model.addAttribute("user", getUser());
     }
 
-    protected void AddAttributesOrderDetails(Model model, Long idOrders) {
+    protected void AddAttributesOrderDetails(Model model, Long idOrder) {
         AddAttributes(model);
-        model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrders));
-        model.addAttribute("order", repoOrders.getById(idOrders));
+        model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrder));
+        model.addAttribute("order", repoOrders.getById(idOrder));
         List<Products> temp = repoProducts.findAllByOrderByNameModel();
         List<Products> products = new ArrayList<>();
         for (Products i : temp) if (i.getQuantity() != 0) products.add(i);
