@@ -9,9 +9,11 @@ import java.util.List;
 public interface RepoStatProducts extends JpaRepository<StatProducts, Long> {
     StatProducts findByIdOrderDetails(Long id);
 
-    List<StatProducts> findByProductStatusAndDate(ProductStatus productStatus, String date);
+    List<StatProducts> findByProductStatusAndDateOrderByIdDesc(ProductStatus productStatus, String date);
 
-    List<StatProducts> findByDate(String date);
+    List<StatProducts> findAllByOrderByIdDesc();
 
-    List<StatProducts> findByProductStatus(ProductStatus productStatus);
+    List<StatProducts> findByDateOrderByIdDesc(String date);
+
+    List<StatProducts> findByProductStatusOrderByIdDesc(ProductStatus productStatus);
 }

@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Global {
@@ -136,15 +135,14 @@ public class Global {
         List<StatProducts> statProducts;
 
         if (productStatus == ProductStatus.Все && (date == null || date.equals(""))) {
-            statProducts = repoStatProducts.findAll();
+            statProducts = repoStatProducts.findAllByOrderByIdDesc();
         } else if (productStatus == ProductStatus.Все) {
-            statProducts = repoStatProducts.findByDate(date);
+            statProducts = repoStatProducts.findByDateOrderByIdDesc(date);
         } else if (date == null || date.equals("")) {
-            statProducts = repoStatProducts.findByProductStatus(productStatus);
+            statProducts = repoStatProducts.findByProductStatusOrderByIdDesc(productStatus);
         } else {
-            statProducts = repoStatProducts.findByProductStatusAndDate(productStatus, date);
+            statProducts = repoStatProducts.findByProductStatusAndDateOrderByIdDesc(productStatus, date);
         }
-        Collections.reverse(statProducts);
 
         int max = 0;
         for (StatProducts i : statProducts) {
@@ -180,10 +178,11 @@ public class Global {
 
     protected void AddAttributesProducts(Model model) {
         AddAttributes(model);
-        List<Products> products = repoProducts.findAll();
-        Collections.reverse(products);
+        List<Products> products = repoProducts.findAllByOrderByIdDesc();
         int quantity = 0;
-        for (Products i : products) quantity += i.getQuantity();
+        for (Products i : products) {
+            quantity += i.getQuantity();
+        }
         model.addAttribute("quantity", quantity);
         model.addAttribute("products", products);
         model.addAttribute("productNameModel", ProductNameModel.values());
@@ -191,9 +190,7 @@ public class Global {
 
     protected void AddAttributesClients(Model model) {
         AddAttributes(model);
-        List<Clients> clients = repoClients.findAll();
-        Collections.reverse(clients);
-        model.addAttribute("clients", clients);
+        model.addAttribute("clients", repoClients.findAllByOrderByIdDesc());
     }
 
     protected void AddAttributesProfiles(Model model) {
