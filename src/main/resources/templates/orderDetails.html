@@ -46,7 +46,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark" for="products">
-                            <strong>Наименование, ИД, модель и имеющееся количество продукта</strong>
+                            <strong>Наименование, модель, ИД и имеющееся количество продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
@@ -56,7 +56,9 @@
                         <form th:action="'/orders/' + ${order.id} + '/orderDetails/addProduct'" method="post">
                             <div class="row">
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <select class="form-select" id="products" name="idProduct">
+                                    <select class="form-select" id="products" name="idProduct"
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="product : ${products}" th:value="${product.id}"
                                                 th:label="${product.nameModel} + ' - ' + ${product.id} + ' - ' + ${product.quantity}"></option>
                                     </select>
@@ -72,7 +74,7 @@
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>ИД, наименование и модель продукта</strong>
+                            <strong>Наименование, модель и ИД продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -104,9 +106,11 @@
                               method="post">
                             <div class="row">
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <select class="form-select" name="idProduct">
+                                    <select class="form-select" name="idProduct"
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="product : ${products}" th:value="${product.id}"
-                                                th:label="${product.id} + ' - ' + ${product.nameModel}"
+                                                th:label="${product.nameModel} + ' - ' + ${product.id}"
                                                 th:selected="${product.id == orderDetail.idProduct}"></option>
                                     </select>
                                 </div>

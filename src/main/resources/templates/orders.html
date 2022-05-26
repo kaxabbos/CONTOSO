@@ -39,7 +39,9 @@
                         <form action="/orders/add" method="post">
                             <div class="row">
                                 <div class="col">
-                                    <select class="form-select" name="idFioClient" id="idFioClient" required>
+                                    <select class="form-select" name="idFioClient" id="idFioClient" required
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="client : ${clients}"
                                                 th:value="${client.id} + ' - ' + ${client.fio}"
                                                 th:label="${client.id} + ' - ' + ${client.fio}">
@@ -95,7 +97,9 @@
                                     <input th:value="${order.id}" class="form-control" type="text" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <select class="form-select" name="idFioClient">
+                                    <select class="form-select" name="idFioClient"
+                                            onmousedown="if(this.options.length>5){this.size=5;}"
+                                            onchange='this.size=0;' onblur="this.size=0;">
                                         <option th:each="client : ${clients}"
                                                 th:value="${client.id} + ' - ' + ${client.fio}"
                                                 th:label="${client.id} + ' - ' + ${client.fio}"

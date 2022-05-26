@@ -1,5 +1,7 @@
 package com.contoso.cont;
 
+import com.contoso.cont.general.AddAttributes;
+import com.contoso.cont.general.General;
 import com.contoso.models.OrderDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class OrderDetailsCont extends Global {
+public class OrderDetailsCont extends AddAttributes {
 
     @GetMapping("/orders/{idOrder}/orderDetails")
     public String Order(Model model, @PathVariable Long idOrder) {

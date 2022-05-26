@@ -1,5 +1,7 @@
 package com.contoso.cont;
 
+import com.contoso.cont.general.AddAttributes;
+import com.contoso.cont.general.General;
 import com.contoso.models.enums.ProductStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class StatProdCont extends Global {
+public class StatProdCont extends AddAttributes {
 
     @GetMapping("/statProd")
     public String statProd(Model model) {

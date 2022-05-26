@@ -1,11 +1,13 @@
 package com.contoso.cont;
 
+import com.contoso.cont.general.AddAttributes;
+import com.contoso.cont.general.General;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class DeleteOrderCont extends Global {
+public class DeleteOrderCont extends AddAttributes {
 
     @GetMapping("/orders/{id}/delete")
     public String OrderDelete1(@PathVariable Long id) {

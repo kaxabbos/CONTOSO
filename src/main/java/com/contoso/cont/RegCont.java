@@ -1,5 +1,7 @@
 package com.contoso.cont;
 
+import com.contoso.cont.general.AddAttributes;
+import com.contoso.cont.general.General;
 import com.contoso.models.Users;
 import com.contoso.models.enums.Roles;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class RegCont extends Global {
+public class RegCont extends AddAttributes {
 
     @GetMapping("/reg")
     public String reg(Model model) {

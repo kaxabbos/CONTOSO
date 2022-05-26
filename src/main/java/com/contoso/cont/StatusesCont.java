@@ -1,5 +1,7 @@
 package com.contoso.cont;
 
+import com.contoso.cont.general.AddAttributes;
+import com.contoso.cont.general.General;
 import com.contoso.models.OrderDetails;
 import com.contoso.models.Orders;
 import com.contoso.models.Products;
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class StatusesCont extends Global {
+public class StatusesCont extends AddAttributes {
 
     @GetMapping("/orders/{id}/reserved")
     public String OrderArrange(Model model, @PathVariable Long id) {
