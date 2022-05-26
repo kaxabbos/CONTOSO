@@ -35,7 +35,6 @@ public class General {
 
     protected String defAvatar = "def.jpeg";
 
-
     protected Users getUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
