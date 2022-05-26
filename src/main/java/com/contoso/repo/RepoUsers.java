@@ -8,5 +8,5 @@ import java.util.List;
 public interface RepoUsers extends JpaRepository<Users, Long> {
     Users findByUsername(String username);
 
-    public List<Users> findAllByOrderByRole();
+    List<Users> findAllByOrderByRole();
 }
