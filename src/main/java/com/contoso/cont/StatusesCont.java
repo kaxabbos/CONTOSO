@@ -121,7 +121,7 @@ public class StatusesCont extends Attributes {
         Orders orders = repoOrders.getById(id);
         orders.setStatus(OrderStatus.Открыто);
         repoOrders.save(orders);
-        return "redirect:/shipment";
+        return "redirect:/orders";
     }
 
     @GetMapping("/orders/{id}/under")

@@ -9,7 +9,7 @@
 
 <body id="page-top">
 <div id="wrapper">
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 background-blue"
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 accent"
          th:insert="blocks/navLeft :: nav"></nav>
     <div class="d-flex flex-column" id="content-wrapper">
         <div id="content">
@@ -77,24 +77,24 @@
                             <strong>Наименование, модель и ИД продукта</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                         <label class="col-form-label text-center text-dark">
                             <strong>Имеющееся количество</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                         <label class="col-form-label text-center text-dark">
                             <strong>Выбранное количество</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                         <label class="col-form-label text-center text-dark">
                             <strong>Стоимость за единицу</strong>
                         </label>
                     </div>
-                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                         <label class="col-form-label text-center text-dark">
-                            <strong>Стоимость текущего заказа</strong>
+                            <strong>Стоимость текущего продукта</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px"></div>
@@ -114,19 +114,19 @@
                                                 th:selected="${product.id == orderDetail.idProduct}"></option>
                                     </select>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                                     <input th:value="${orderDetail.quantityMax}" class="form-control" type="number"
                                            readonly>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                                     <input th:value="${orderDetail.quantity}" class="form-control" type="number"
                                            min="0" th:max="${orderDetail.quantityMax}" name="quantity" required>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                                     <input th:value="${orderDetail.unitPrice}" class="form-control" type="number"
                                            readonly>
                                 </div>
-                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
+                                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-150px">
                                     <input th:value="${orderDetail.price}" class="form-control" type="number" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-110px">

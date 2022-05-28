@@ -20,8 +20,12 @@
     font-size: 14px;
 }
 
-.background-blue {
-    background: var(--bs-blue);
+.accent {
+    /*background: var(--bs-blue);*/
+}
+
+.pb-24 {
+    padding-bottom: 24px;
 }
 
 .mxh-40px {
