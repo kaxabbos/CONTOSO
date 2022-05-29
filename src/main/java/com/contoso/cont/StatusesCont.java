@@ -19,11 +19,11 @@ import java.util.List;
 @Controller
 public class StatusesCont extends Attributes {
 
-    @GetMapping("/orders/{id}/reserved")
-    public String OrderArrange(Model model, @PathVariable Long id) {
-        Orders order = repoOrders.getById(id);
+    @GetMapping("/orders/{idOrder}/reserved")
+    public String OrderArrange(Model model, @PathVariable Long idOrder) {
+        Orders order = repoOrders.getById(idOrder);
 
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(id);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrder);
         Products product;
 
         if (orderDetailsList.size() == 0) {
@@ -65,25 +65,25 @@ public class StatusesCont extends Attributes {
         return "redirect:/orders";
     }
 
-    @GetMapping("/open/{id}/not_reserved")
-    public String OrderNotArrange1(@PathVariable Long id) {
-        Orders order = repoOrders.getById(id);
+    @GetMapping("/open/{idOrder}/not_reserved")
+    public String OrderNotArrange1(@PathVariable Long idOrder) {
+        Orders order = repoOrders.getById(idOrder);
         order.setStatus(OrderStatus.Не_зарезервировано);
         repoOrders.save(order);
         return "redirect:/open";
     }
 
-    @GetMapping("/under/{id}/not_reserved")
-    public String OrderNotArrange2(@PathVariable Long id) {
-        Orders order = repoOrders.getById(id);
+    @GetMapping("/under/{idOrder}/not_reserved")
+    public String OrderNotArrange2(@PathVariable Long idOrder) {
+        Orders order = repoOrders.getById(idOrder);
         order.setStatus(OrderStatus.Не_зарезервировано);
         repoOrders.save(order);
         return "redirect:/under";
     }
 
-    @GetMapping("/orders/{id}/shipment")
-    public String OrderShipment(Model model, @PathVariable Long id) {
-        Orders order = repoOrders.getById(id);
+    @GetMapping("/orders/{idOrder}/shipment")
+    public String OrderShipment(Model model, @PathVariable Long idOrder) {
+        Orders order = repoOrders.getById(idOrder);
 
         if (order.getPaymentType() == PaymentType.Выберите) {
             AddAttributesPayments(model);
@@ -96,11 +96,11 @@ public class StatusesCont extends Attributes {
         return "redirect:/payments";
     }
 
-    @GetMapping("/orders/{id}/shipped")
-    public String OrderShipped(@PathVariable Long id) {
-        Orders order = repoOrders.getById(id);
+    @GetMapping("/orders/{idOrder}/shipped")
+    public String OrderShipped(@PathVariable Long idOrder) {
+        Orders order = repoOrders.getById(idOrder);
 
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(id);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrder);
 
         String dateNow = LocalDateTime.now().toString();
         StatProducts statProducts;
@@ -116,17 +116,17 @@ public class StatusesCont extends Attributes {
         return "redirect:/shipment";
     }
 
-    @GetMapping("/orders/{id}/open")
-    public String OrderOpen(@PathVariable Long id) {
-        Orders orders = repoOrders.getById(id);
+    @GetMapping("/orders/{idOrder}/open")
+    public String OrderOpen(@PathVariable Long idOrder) {
+        Orders orders = repoOrders.getById(idOrder);
         orders.setStatus(OrderStatus.Открыто);
         repoOrders.save(orders);
         return "redirect:/orders";
     }
 
-    @GetMapping("/orders/{id}/under")
-    public String OrderUnder(@PathVariable Long id) {
-        Orders orders = repoOrders.getById(id);
+    @GetMapping("/orders/{idOrder}/under")
+    public String OrderUnder(@PathVariable Long idOrder) {
+        Orders orders = repoOrders.getById(idOrder);
         orders.setStatus(OrderStatus.Под_заказ);
         repoOrders.save(orders);
         return "redirect:/shipment";
