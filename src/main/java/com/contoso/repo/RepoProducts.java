@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface RepoProducts extends JpaRepository<Products, Long> {
     List<Products> findAllByOrderByNameModel();
-//    List<Products> findByQuantityNotInOrderByNameModel(int i);
 
     List<Products> findAllByOrderByIdDesc();
 }
