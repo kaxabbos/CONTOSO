@@ -19,7 +19,7 @@ public class Attributes extends General {
 
     protected void AddAttributesDetails(Model model, Long idOrder) {
         AddAttributes(model);
-        model.addAttribute("details", repoOrderDetails.findByIdOrders(idOrder));
+        model.addAttribute("details", repoOrderDetails.findByIdOrder(idOrder));
         model.addAttribute("order", repoOrders.getById(idOrder));
     }
 
@@ -30,7 +30,7 @@ public class Attributes extends General {
 
     protected void AddAttributesOrderDetails(Model model, Long idOrder) {
         AddAttributes(model);
-        model.addAttribute("orderDetails", repoOrderDetails.findByIdOrders(idOrder));
+        model.addAttribute("orderDetails", repoOrderDetails.findByIdOrder(idOrder));
         model.addAttribute("order", repoOrders.getById(idOrder));
         List<Products> temp = repoProducts.findAllByOrderByNameModel();
         List<Products> products = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Attributes extends General {
     protected void AddAttributesOrders(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Не_зарезервировано);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("orders", ordersList);
         model.addAttribute("clients", repoClients.findAll());
     }
@@ -49,7 +49,7 @@ public class Attributes extends General {
     protected void AddAttributesPayments(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Зарезервировано);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("payments", ordersList);
         model.addAttribute("paymentTypes", PaymentType.values());
     }
@@ -57,28 +57,28 @@ public class Attributes extends General {
     protected void AddAttributesShipment(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.В_отгрузке);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("shipments", ordersList);
     }
 
     protected void AddAttributesShipped(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Отгружено);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("shippeds", ordersList);
     }
 
     protected void AddAttributesOpen(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Открыто);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("opens", ordersList);
     }
 
     protected void AddAttributesUnder(Model model) {
         AddAttributes(model);
         List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Под_заказ);
-        PriceQuantity(model, ordersList);
+        getPriceAndQuantity(model, ordersList);
         model.addAttribute("unders", ordersList);
     }
 

@@ -28,7 +28,7 @@ public class OrderDetailsCont extends Attributes {
             return "orderDetails";
         }
 
-        for (OrderDetails i : repoOrderDetails.findByIdOrders(idOrder)) {
+        for (OrderDetails i : repoOrderDetails.findByIdOrder(idOrder)) {
             if (i.getIdProduct().equals(idProduct)) {
                 AddAttributesOrderDetails(model, idOrder);
                 model.addAttribute("message", "Вы не можете добавить несколько раз один и тот же продукт");
@@ -38,7 +38,7 @@ public class OrderDetailsCont extends Attributes {
 
         OrderDetails orderDetails = new OrderDetails(repoProducts.getById(idProduct), idOrder);
         repoOrderDetails.save(orderDetails);
-        FullPriceAndFullQuantity(idOrder);
+        setFullPriceAndFullQuantity(idOrder);
         return "redirect:/orders/{idOrder}/orderDetails";
     }
 
@@ -46,7 +46,7 @@ public class OrderDetailsCont extends Attributes {
     public String OrderEditProduct(Model model, @PathVariable Long idOrder, @PathVariable Long idOrderDetail, @RequestParam Long idProduct, @RequestParam int quantity) {
         OrderDetails orderDetails = repoOrderDetails.getById(idOrderDetail);
         if (!orderDetails.getIdProduct().equals(idProduct)) {
-            List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
+            List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrder);
 
             for (OrderDetails i : orderDetailsList) {
                 if (i.getIdProduct().equals(idProduct)) {
@@ -65,7 +65,7 @@ public class OrderDetailsCont extends Attributes {
 
         repoOrderDetails.save(orderDetails);
 
-        FullPriceAndFullQuantity(idOrder);
+        setFullPriceAndFullQuantity(idOrder);
 
         return "redirect:/orders/{idOrder}/orderDetails";
     }

@@ -11,7 +11,8 @@ public class OrderDetails {
     private Long id;
 
     private Long idProduct;
-    private Long idOrders;
+
+    private Long idOrder;
 
     @Enumerated(EnumType.STRING)
     private ProductNameModel productNameModel;
@@ -23,8 +24,8 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
-    public OrderDetails(Products product, Long idOrders) {
-        this.idOrders = idOrders;
+    public OrderDetails(Products product, Long idOrder) {
+        this.idOrder = idOrder;
         this.idProduct = product.getId();
         this.productNameModel = product.getNameModel();
         this.unitPrice = product.getUnitPrice();
@@ -54,12 +55,12 @@ public class OrderDetails {
         this.idProduct = idProduct;
     }
 
-    public Long getIdOrders() {
-        return idOrders;
+    public Long getIdOrder() {
+        return idOrder;
     }
 
-    public void setIdOrders(Long idOrders) {
-        this.idOrders = idOrders;
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
     }
 
     public ProductNameModel getProductNameModel() {

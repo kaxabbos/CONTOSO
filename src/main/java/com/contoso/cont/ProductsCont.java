@@ -95,16 +95,16 @@ public class ProductsCont extends Attributes {
         return "redirect:/products";
     }
 
-    @PostMapping("/product/{id}/edit")
-    public String ProductEdit(@PathVariable Long id, @RequestParam ProductNameModel nameModel, @RequestParam int quantity, @RequestParam int unitPrice) {
+    @PostMapping("/product/{idProduct}/edit")
+    public String ProductEdit(@PathVariable Long idProduct, @RequestParam ProductNameModel nameModel, @RequestParam int quantity, @RequestParam int unitPrice) {
         String dateNow = LocalDateTime.now().toString();
-        Products product = repoProducts.getById(id);
+        Products product = repoProducts.getById(idProduct);
 
         if (quantity > product.getQuantity()) {
-            StatProducts statProducts = new StatProducts(quantity - product.getQuantity(), dateNow.substring(0, 10), id, null, ProductStatus.Произведено);
+            StatProducts statProducts = new StatProducts(quantity - product.getQuantity(), dateNow.substring(0, 10), idProduct, null, ProductStatus.Произведено);
             repoStatProducts.save(statProducts);
         } else if (quantity < product.getQuantity()) {
-            StatProducts statProducts = new StatProducts(product.getQuantity() - quantity, dateNow.substring(0, 10), id, null, ProductStatus.Отгружено);
+            StatProducts statProducts = new StatProducts(product.getQuantity() - quantity, dateNow.substring(0, 10), idProduct, null, ProductStatus.Отгружено);
             repoStatProducts.save(statProducts);
         }
 
@@ -112,7 +112,7 @@ public class ProductsCont extends Attributes {
         product.setQuantity(quantity);
         product.setUnitPrice(unitPrice);
 
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdProduct(id);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdProduct(idProduct);
         for (OrderDetails i : orderDetailsList) {
             i.setQuantityMax(product.getQuantity());
             repoOrderDetails.save(i);
@@ -122,22 +122,22 @@ public class ProductsCont extends Attributes {
         return "redirect:/products";
     }
 
-    @GetMapping("/product/{id}/delete")
-    public String ProductDelete(Model model, @PathVariable Long id) {
-        List<OrderDetails> orderDetails = repoOrderDetails.findByIdProduct(id);
+    @GetMapping("/product/{idProduct}/delete")
+    public String ProductDelete(Model model, @PathVariable Long idProduct) {
+        List<OrderDetails> orderDetails = repoOrderDetails.findByIdProduct(idProduct);
         if (orderDetails.size() != 0) {
-            Products products = repoProducts.getById(id);
+            Products products = repoProducts.getById(idProduct);
             AddAttributesProducts(model);
             model.addAttribute("message", "Продукт \"" + products.getId() + " - " + products.getNameModel() + "\" используется");
             return "products";
         }
-        if (repoProducts.getById(id).getQuantity() != 0){
+        if (repoProducts.getById(idProduct).getQuantity() != 0){
             AddAttributesProducts(model);
-            Products products = repoProducts.getById(id);
+            Products products = repoProducts.getById(idProduct);
             model.addAttribute("message", "Продукт \"" + products.getId() + " - " + products.getNameModel() + "\" еще не отгружен");
             return "products";
         }
-        repoProducts.deleteById(id);
+        repoProducts.deleteById(idProduct);
         return "redirect:/products";
     }
 }

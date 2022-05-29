@@ -8,39 +8,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class DeleteOrderCont extends Attributes {
 
-    @GetMapping("/orders/{id}/delete")
-    public String OrderDelete1(@PathVariable Long id) {
-        OrderDelete(id);
+    @GetMapping("/orders/{idOrder}/delete")
+    public String OrderDelete1(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetails(idOrder);
         return "redirect:/orders";
     }
 
-    @GetMapping("/payments/{id}/delete")
-    public String OrderDelete2(@PathVariable Long id) {
-        OrderAndStatProductDelete(id);
+    @GetMapping("/payments/{idOrder}/delete")
+    public String OrderDelete2(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetailsAndStatProduct(idOrder);
         return "redirect:/payments";
     }
 
-    @GetMapping("/shipment/{id}/delete")
-    public String OrderDelete3(@PathVariable Long id) {
-        OrderAndStatProductDelete(id);
+    @GetMapping("/shipment/{idOrder}/delete")
+    public String OrderDelete3(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetailsAndStatProduct(idOrder);
         return "redirect:/shipment";
     }
 
-    @GetMapping("/shipped/{id}/delete")
-    public String OrderDelete4(@PathVariable Long id) {
-        OrderDelete(id);
+    @GetMapping("/shipped/{idOrder}/delete")
+    public String OrderDelete4(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetails(idOrder);
         return "redirect:/shipped";
     }
 
-    @GetMapping("/open/{id}/delete")
-    public String OrderDelete5(@PathVariable Long id) {
-        OrderDelete(id);
+    @GetMapping("/open/{idOrder}/delete")
+    public String OrderDelete5(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetails(idOrder);
         return "redirect:/open";
     }
 
-    @GetMapping("/under/{id}/delete")
-    public String OrderDelete6(@PathVariable Long id) {
-        OrderDelete(id);
+    @GetMapping("/under/{idOrder}/delete")
+    public String OrderDelete6(@PathVariable Long idOrder) {
+        DeleteOrderAndOrderDetails(idOrder);
         return "redirect:/under";
     }
 }

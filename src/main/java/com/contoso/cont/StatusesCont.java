@@ -23,7 +23,7 @@ public class StatusesCont extends Attributes {
     public String OrderArrange(Model model, @PathVariable Long id) {
         Orders order = repoOrders.getById(id);
 
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(id);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(id);
         Products product;
 
         if (orderDetailsList.size() == 0) {
@@ -100,7 +100,7 @@ public class StatusesCont extends Attributes {
     public String OrderShipped(@PathVariable Long id) {
         Orders order = repoOrders.getById(id);
 
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(id);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(id);
 
         String dateNow = LocalDateTime.now().toString();
         StatProducts statProducts;

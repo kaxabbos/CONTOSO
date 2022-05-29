@@ -68,17 +68,14 @@ public class General {
         return "Добро пожаловать";
     }
 
-    protected void OrderDelete(Long idOrder) {
+    protected void DeleteOrderAndOrderDetails(Long idOrder) {
         repoOrders.deleteById(idOrder);
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
-        for (OrderDetails i : orderDetailsList) {
-            repoOrderDetails.deleteById(i.getId());
-        }
+        repoOrderDetails.deleteAll(repoOrderDetails.findByIdOrder(idOrder));
     }
 
-    protected void OrderAndStatProductDelete(Long idOrder) {
+    protected void DeleteOrderAndOrderDetailsAndStatProduct(Long idOrder) {
         repoOrders.deleteById(idOrder);
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrder);
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrder);
         Products product;
         for (OrderDetails i : orderDetailsList) {
             repoStatProducts.delete(repoStatProducts.findByIdOrderDetails(i.getId()));
@@ -90,12 +87,10 @@ public class General {
                 repoOrderDetails.save(j);
             }
         }
-        for (OrderDetails i : orderDetailsList) {
-            repoOrderDetails.deleteById(i.getId());
-        }
+        repoOrderDetails.deleteAll(orderDetailsList);
     }
 
-    protected void PriceQuantity(Model model, List<Orders> ordersList) {
+    protected void getPriceAndQuantity(Model model, List<Orders> ordersList) {
         int price = 0, quantity = 0;
         for (Orders i : ordersList) {
             price += i.getFullPrice();
@@ -105,8 +100,8 @@ public class General {
         model.addAttribute("quantity", quantity);
     }
 
-    protected void FullPriceAndFullQuantity(Long idOrders) {
-        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrders(idOrders);
+    protected void setFullPriceAndFullQuantity(Long idOrders) {
+        List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrders);
         int fullPrice = 0, fullQuantity = 0;
 
         for (OrderDetails i : orderDetailsList) {
