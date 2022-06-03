@@ -1,7 +1,5 @@
 package com.contoso.models;
 
-import com.contoso.models.enums.ProductNameModel;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,8 +12,7 @@ public class OrderDetails {
 
     private Long idOrder;
 
-    @Enumerated(EnumType.STRING)
-    private ProductNameModel productNameModel;
+    private String nameProduct;
     private int price;
     private int unitPrice;
     private int quantity;
@@ -27,7 +24,7 @@ public class OrderDetails {
     public OrderDetails(Products product, Long idOrder) {
         this.idOrder = idOrder;
         this.idProduct = product.getId();
-        this.productNameModel = product.getNameModel();
+        this.nameProduct = product.getName();
         this.unitPrice = product.getUnitPrice();
         this.quantityMax = product.getQuantity();
         this.price = 0;
@@ -36,7 +33,7 @@ public class OrderDetails {
 
     public void set(Products product) {
         this.idProduct = product.getId();
-        this.productNameModel = product.getNameModel();
+        this.nameProduct = product.getName();
         this.unitPrice = product.getUnitPrice();
         this.quantityMax = product.getQuantity();
         this.price = 0;
@@ -63,12 +60,12 @@ public class OrderDetails {
         this.idOrder = idOrder;
     }
 
-    public ProductNameModel getProductNameModel() {
-        return productNameModel;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setProductNameModel(ProductNameModel productNameModel) {
-        this.productNameModel = productNameModel;
+    public void setNameProduct(String name) {
+        this.nameProduct = name;
     }
 
     public int getPrice() {

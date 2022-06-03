@@ -32,7 +32,7 @@ public class Attributes extends General {
         AddAttributes(model);
         model.addAttribute("orderDetails", repoOrderDetails.findByIdOrder(idOrder));
         model.addAttribute("order", repoOrders.getById(idOrder));
-        List<Products> temp = repoProducts.findAllByOrderByNameModel();
+        List<Products> temp = repoProducts.findAllByOrderByName();
         List<Products> products = new ArrayList<>();
         for (Products i : temp) if (i.getQuantity() != 0) products.add(i);
         model.addAttribute("products", products);
@@ -68,18 +68,11 @@ public class Attributes extends General {
         model.addAttribute("shippeds", ordersList);
     }
 
-    protected void AddAttributesOpen(Model model) {
+    protected void AddAttributeswaiting(Model model) {
         AddAttributes(model);
-        List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Открыто);
+        List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Ожидание);
         getPriceAndQuantity(model, ordersList);
-        model.addAttribute("opens", ordersList);
-    }
-
-    protected void AddAttributesUnder(Model model) {
-        AddAttributes(model);
-        List<Orders> ordersList = repoOrders.findByOrderStatus(OrderStatus.Под_заказ);
-        getPriceAndQuantity(model, ordersList);
-        model.addAttribute("unders", ordersList);
+        model.addAttribute("waitings", ordersList);
     }
 
     protected void AddAttributesStatProd(Model model, ProductStatus productStatus, String date) {
@@ -138,7 +131,6 @@ public class Attributes extends General {
         }
         model.addAttribute("quantity", quantity);
         model.addAttribute("products", products);
-        model.addAttribute("productNameModel", ProductNameModel.values());
     }
 
     protected void AddAttributesClients(Model model) {

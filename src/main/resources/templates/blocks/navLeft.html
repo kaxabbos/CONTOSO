@@ -18,13 +18,8 @@
                 </a>
             </li>
             <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
-                <a class="nav-link" href="/open">
-                    <i class="far fa-folder-open icons"></i><span>Открыто</span>
-                </a>
-            </li>
-            <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">
-                <a class="nav-link" href="/under">
-                    <i class="fas fa-shopping-cart icons"></i><span>Под заказ</span>
+                <a class="nav-link" href="/waiting">
+                    <i class="far fa-folder-open icons"></i><span>Ожидание</span>
                 </a>
             </li>
             <li th:if="${role == 'Менеджер' || role == 'Руководитель'}" class="nav-item">

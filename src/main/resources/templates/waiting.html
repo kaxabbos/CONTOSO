@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>CONTOSO - Под заказ</title>
+    <title>CONTOSO - Открыто</title>
 </head>
 
 <head th:insert="blocks\head :: head"></head>
@@ -15,7 +15,7 @@
         <div id="content">
             <div th:insert="blocks/navTop :: nav"></div>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Под заказ</h3>
+                <h3 class="text-dark mb-4">Ожидание</h3>
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
                         <label class="col-form-label text-center text-dark">
@@ -46,32 +46,32 @@
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-120px"></div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px"></div>
                 </div>
-                <div th:each="under : ${unders}" class="row mb-5px">
+                <div th:each="waiting : ${waitings}" class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                        <input th:value="${under.id}" class="form-control" type="text" readonly>
+                        <input th:value="${waiting.id}" class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <input th:value="${under.idFioClient}" class="form-control" type="text" readonly>
+                        <input th:value="${waiting.idFioClient}" class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
-                        <input th:value="${under.date}" class="form-control" type="date" readonly>
+                        <input th:value="${waiting.date}" class="form-control" type="date" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
-                        <input th:value="${under.fullPrice}" class="form-control" type="number" readonly>
+                        <input th:value="${waiting.fullPrice}" class="form-control" type="number" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
-                        <input th:value="${under.fullQuantity}" class="form-control" type="number" readonly>
+                        <input th:value="${waiting.fullQuantity}" class="form-control" type="number" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-80px">
-                        <a th:href="'/orders/' + ${under.id} + '/details'"
+                        <a th:href="'/orders/' + ${waiting.id} + '/details'"
                            class="btn btn-primary btn-sm fs-16px" type="submit">Детали</a>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-120px">
-                        <a th:href="'/under/' + ${under.id} + '/not_reserved'"
+                        <a th:href="'/waiting/' + ${waiting.id} + '/not_reserved'"
                            class="btn btn-success btn-sm fs-16px" type="submit">Оформление</a>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-90px">
-                        <a th:href="'/under/' + ${under.id} + '/delete'"
+                        <a th:href="'/waiting/' + ${waiting.id} + '/delete'"
                            class="btn btn-danger btn-sm fs-16px" type="submit">Удалить</a>
                     </div>
                 </div>

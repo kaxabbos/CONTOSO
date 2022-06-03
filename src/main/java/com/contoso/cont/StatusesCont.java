@@ -65,20 +65,12 @@ public class StatusesCont extends Attributes {
         return "redirect:/orders";
     }
 
-    @GetMapping("/open/{idOrder}/not_reserved")
+    @GetMapping("/waiting/{idOrder}/not_reserved")
     public String OrderNotArrange1(@PathVariable Long idOrder) {
         Orders order = repoOrders.getById(idOrder);
         order.setStatus(OrderStatus.Не_зарезервировано);
         repoOrders.save(order);
-        return "redirect:/open";
-    }
-
-    @GetMapping("/under/{idOrder}/not_reserved")
-    public String OrderNotArrange2(@PathVariable Long idOrder) {
-        Orders order = repoOrders.getById(idOrder);
-        order.setStatus(OrderStatus.Не_зарезервировано);
-        repoOrders.save(order);
-        return "redirect:/under";
+        return "redirect:/waiting";
     }
 
     @GetMapping("/orders/{idOrder}/shipment")
@@ -116,19 +108,11 @@ public class StatusesCont extends Attributes {
         return "redirect:/shipment";
     }
 
-    @GetMapping("/orders/{idOrder}/open")
-    public String OrderOpen(@PathVariable Long idOrder) {
+    @GetMapping("/orders/{idOrder}/waiting")
+    public String OrderWaiting(@PathVariable Long idOrder) {
         Orders orders = repoOrders.getById(idOrder);
-        orders.setStatus(OrderStatus.Открыто);
+        orders.setStatus(OrderStatus.Ожидание);
         repoOrders.save(orders);
         return "redirect:/orders";
-    }
-
-    @GetMapping("/orders/{idOrder}/under")
-    public String OrderUnder(@PathVariable Long idOrder) {
-        Orders orders = repoOrders.getById(idOrder);
-        orders.setStatus(OrderStatus.Под_заказ);
-        repoOrders.save(orders);
-        return "redirect:/shipment";
     }
 }

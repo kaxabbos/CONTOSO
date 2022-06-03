@@ -1,7 +1,5 @@
 package com.contoso.models;
 
-import com.contoso.models.enums.ProductNameModel;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +8,7 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ProductNameModel nameModel;
+    private String name;
 
     private int unitPrice;
     private int quantity;
@@ -19,8 +16,8 @@ public class Products {
     public Products() {
     }
 
-    public Products(ProductNameModel nameModel, int quantity, int unitPrice) {
-        this.nameModel = nameModel;
+    public Products(String name, int quantity, int unitPrice) {
+        this.name = name;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
     }
@@ -29,12 +26,12 @@ public class Products {
         return id;
     }
 
-    public ProductNameModel getNameModel() {
-        return nameModel;
+    public String getName() {
+        return name;
     }
 
-    public void setNameModel(ProductNameModel nameModel) {
-        this.nameModel = nameModel;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getUnitPrice() {

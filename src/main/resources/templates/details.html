@@ -56,7 +56,7 @@
                 </div>
                 <div th:each="detail : ${details}" class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <input th:value="${detail.idProduct + ' - ' + detail.productNameModel}"
+                        <input th:value="${detail.idProduct + ' - ' + detail.nameProduct}"
                                class="form-control" type="text" readonly>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row mb-5px" style="color: rgb(0,0,0);">
+                <div class="row mb-5px black">
                     <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
                         <span>Суммарная стоимость:&nbsp;</span>
                         <span th:text="${order.fullPrice}"></span>

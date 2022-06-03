@@ -26,10 +26,10 @@ public class OthersCont extends Attributes {
         return "about";
     }
 
-    @GetMapping("/open")
-    public String Open(Model model) {
-        AddAttributesOpen(model);
-        return "open";
+    @GetMapping("/waiting")
+    public String waiting(Model model) {
+        AddAttributeswaiting(model);
+        return "waiting";
     }
 
     @GetMapping("/shipment")
@@ -42,11 +42,5 @@ public class OthersCont extends Attributes {
     public String Shipped(Model model) {
         AddAttributesShipped(model);
         return "shipped";
-    }
-
-    @GetMapping("/under")
-    public String Under(Model model) {
-        AddAttributesUnder(model);
-        return "under";
     }
 }

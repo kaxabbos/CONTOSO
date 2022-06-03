@@ -17,28 +17,16 @@
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Продукты</h3>
                 <div th:if="${message}" class="text-center mt-20px">
-                    <div class="alert alert-success" roles="alert">
+                    <div class="alert alert-success" role="alert">
                         <strong><span th:text="${message}"></span></strong>
                     </div>
                 </div>
                 <hr>
-                <h5 class="text-dark mb-4">Загрузить csv-файл</h5>
-                <form action="/product/csv" method="post" class="mb-20px" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                            <input class="form-control" type="file" name="file" required>
-                        </div>
-                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-100px">
-                            <button class="btn btn-primary btn-sm fs-16px" type="submit">Загрузить</button>
-                        </div>
-                    </div>
-                </form>
-                <hr>
                 <h5 class="text-dark mb-4">Добавить новую продукцию</h5>
                 <div class="row mb-5px">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                        <label class="col-form-label text-center text-dark" for="nameModel">
-                            <strong>Наименование продукции и модель</strong>
+                        <label class="col-form-label text-center text-dark" for="name">
+                            <strong>Наименование продукции</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -56,13 +44,7 @@
                 <form action="/product/add" method="post" class="mb-20px">
                     <div class="row">
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                            <select class="form-select" id="nameModel" name="nameModel"
-                                    onmousedown="if(this.options.length>5){this.size=5;}"
-                                    onchange='this.size=0;' onblur="this.size=0;">
-                                <option th:each="nameModel : ${productNameModel}"
-                                        th:label="${nameModel}" th:value="${nameModel}">
-                                </option>
-                            </select>
+                            <input class="form-control" type="text" name="name" id="name" required>
                         </div>
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
                             <input class="form-control" type="number" min="1" name="quantity" id="quantity" required>
@@ -76,7 +58,7 @@
                     </div>
                 </form>
                 <hr>
-                <div class="row mb-5px" style="color: rgb(0,0,0);">
+                <div class="row mb-5px black">
                     <div class="col d-lg-flex justify-content-lg-start align-items-lg-start">
                         <span class="justify-content-lg-start">Текущий остаток:&nbsp;</span>
                         <span th:text="${quantity}" class="justify-content-lg-end"></span>
@@ -92,7 +74,7 @@
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <label class="col-form-label text-center text-dark">
-                            <strong>Наименование продукции и модель</strong>
+                            <strong>Наименование продукции</strong>
                         </label>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
@@ -116,14 +98,7 @@
                                     <input th:value="${product.id}" class="form-control" type="text" readonly>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                    <select class="form-select" name="nameModel"
-                                            onmousedown="if(this.options.length>5){this.size=5;}"
-                                            onchange='this.size=0;' onblur="this.size=0;">
-                                        <option th:each="nameModel : ${productNameModel}"
-                                                th:label="${nameModel}" th:value="${nameModel}"
-                                                th:selected="${product.nameModel == nameModel}">
-                                        </option>
-                                    </select>
+                                    <input th:value="${product.name}" class="form-control" type="text" name="name" required>
                                 </div>
                                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center mxw-200px">
                                     <input th:value="${product.quantity}" class="form-control" type="number" min="0"
