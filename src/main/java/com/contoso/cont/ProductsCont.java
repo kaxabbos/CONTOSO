@@ -48,6 +48,8 @@ public class ProductsCont extends Attributes {
 
     @PostMapping("/product/{idProduct}/edit")
     public String ProductEdit(@PathVariable Long idProduct, @RequestParam String name, @RequestParam int quantity, @RequestParam int unitPrice) {
+        boolean editName = false;
+
         String dateNow = LocalDateTime.now().toString();
         Products product = repoProducts.getById(idProduct);
 
@@ -59,13 +61,14 @@ public class ProductsCont extends Attributes {
             repoStatProducts.save(statProducts);
         }
 
-        product.setName(name);
         product.setQuantity(quantity);
         product.setUnitPrice(unitPrice);
 
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdProduct(idProduct);
         Orders order;
+        if (!product.getName().equals(name)) editName = true;
         for (OrderDetails i : orderDetailsList) {
+            if (editName) i.setNameProduct(name);
             i.setQuantityMax(product.getQuantity());
             order = repoOrders.getById(i.getIdOrder());
             if (order.getStatus() == OrderStatus.Не_зарезервировано || order.getStatus() == OrderStatus.Ожидание) {
@@ -75,6 +78,8 @@ public class ProductsCont extends Attributes {
             }
             repoOrderDetails.save(i);
         }
+
+        product.setName(name);
 
         repoProducts.save(product);
         return "redirect:/products";
