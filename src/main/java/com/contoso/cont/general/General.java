@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class General {
@@ -114,4 +115,9 @@ public class General {
         orders.setFullQuantity(fullQuantity);
         repoOrders.save(orders);
     }
+
+    protected String DateNow() {
+        return LocalDateTime.now().toString().substring(0, 10);
+    }
+
 }

@@ -40,8 +40,7 @@ public class ProductsCont extends Attributes {
             return "products";
         }
 
-        String dateNow = LocalDateTime.now().toString();
-        StatProducts statProducts = new StatProducts(quantity, dateNow.substring(0, 10), product.getId(), null, ProductStatus.Произведено);
+        StatProducts statProducts = new StatProducts(quantity, DateNow(), product.getId(), null, ProductStatus.Произведено);
         repoStatProducts.save(statProducts);
         return "redirect:/products";
     }
@@ -50,14 +49,13 @@ public class ProductsCont extends Attributes {
     public String ProductEdit(@PathVariable Long idProduct, @RequestParam String name, @RequestParam int quantity, @RequestParam int unitPrice) {
         boolean editName = false;
 
-        String dateNow = LocalDateTime.now().toString();
         Products product = repoProducts.getById(idProduct);
 
         if (quantity > product.getQuantity()) {
-            StatProducts statProducts = new StatProducts(quantity - product.getQuantity(), dateNow.substring(0, 10), idProduct, null, ProductStatus.Произведено);
+            StatProducts statProducts = new StatProducts(quantity - product.getQuantity(), DateNow(), idProduct, null, ProductStatus.Произведено);
             repoStatProducts.save(statProducts);
         } else if (quantity < product.getQuantity()) {
-            StatProducts statProducts = new StatProducts(product.getQuantity() - quantity, dateNow.substring(0, 10), idProduct, null, ProductStatus.Отгружено);
+            StatProducts statProducts = new StatProducts(product.getQuantity() - quantity, DateNow(), idProduct, null, ProductStatus.Отгружено);
             repoStatProducts.save(statProducts);
         }
 

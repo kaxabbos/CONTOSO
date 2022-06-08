@@ -46,11 +46,10 @@ public class StatusesCont extends Attributes {
             }
         }
 
-        String dateNow = LocalDateTime.now().toString();
         for (OrderDetails i : orderDetailsList) {
             product = repoProducts.getById(i.getIdProduct());
             product.setQuantity(product.getQuantity() - i.getQuantity());
-            StatProducts statProducts = new StatProducts(i.getQuantity(), dateNow.substring(0, 10), product.getId(), i.getId(), ProductStatus.Зарезервировано);
+            StatProducts statProducts = new StatProducts(i.getQuantity(), DateNow(), product.getId(), i.getId(), ProductStatus.Зарезервировано);
             repoProducts.save(product);
             repoStatProducts.save(statProducts);
             List<OrderDetails> orderDetailsList1 = repoOrderDetails.findByIdProduct(product.getId());
@@ -94,12 +93,11 @@ public class StatusesCont extends Attributes {
 
         List<OrderDetails> orderDetailsList = repoOrderDetails.findByIdOrder(idOrder);
 
-        String dateNow = LocalDateTime.now().toString();
         StatProducts statProducts;
         for (OrderDetails i : orderDetailsList) {
             statProducts = repoStatProducts.findByIdOrderDetails(i.getId());
             statProducts.setProductStatus(ProductStatus.Отгружено);
-            statProducts.setDate(dateNow.substring(0, 10));
+            statProducts.setDate(DateNow());
             repoStatProducts.save(statProducts);
         }
 
